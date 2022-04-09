@@ -1,7 +1,10 @@
--- Drop and recreate Users table (Example)
-
 DROP TABLE IF EXISTS users CASCADE;
+
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255) NOT NULL
+  username VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL, /* Storing as plain text password as this is proof of concept, user login security may be implimented at a later dat NCM*/
+  profile_url VARCHAR(255) NOT NULL,
+  active  BOOLEAN NOT NULL DEFAULT TRUE
 );
