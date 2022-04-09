@@ -35,34 +35,34 @@ module.exports = (db) => {
 
   //EDITS SELECTED VALUES IN ROW ON POINT TABLE
   router.post("/:id/edit", (req, res) => {
-    console.log(req.params.id);
+    console.log(req.body.id);
     const mapID = req.params.id;
     const queryParams = [];
     let queryString = `UPDATE point`;
 
     if (req.body.lat) {
       queryParams.push(req.body.lat);
-      queryString += `SET lat = $${queryParams.length}`;
+      queryString += `SET lat = $${queryParams.length},`;
     }
 
     if (req.body.lng) {
       queryParams.push(req.body.lng);
-      queryString += `SET lng = $${queryParams.length}`;
+      queryString += `SET lng = $${queryParams.length},`;
     }
 
     if (req.body.title) {
       queryParams.push(req.body.title);
-      queryString += `SET title = $${queryParams.length}`;
+      queryString += `SET title = $${queryParams.length},`;
     }
 
     if (req.body.description) {
       queryParams.push(req.body.description);
-      queryString += `SET description = $${queryParams.length}`;
+      queryString += `SET description = $${queryParams.length},`;
     }
 
     if (req.body.point_url) {
       queryParams.push(req.body.point_url);
-      queryString += `SET point_url = $${queryParams.length}`;
+      queryString += `SET point_url = $${queryParams.length},`;
     }
 
     queryParams.push(mapID);
