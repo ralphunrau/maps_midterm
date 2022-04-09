@@ -14,18 +14,39 @@
 
 <body>
 
-  <header>
-    <%- include('partials/_header') %>
-  </header>
+  <%- include('partials/_header') %>
 
-  <div>
-    <div class="title_favorite">
-      <h1>Best Places To Eat</h1>
-      <form action="/favorites/:id" method="POST" >
-        <button type="submit" class="fav_button">Add To Fav</button>
-      </form>
+  <div class="maps_joined">
+    <div class="maps_left">
+
+      <div class="title_favorite">
+        <h1>Best Places To Eat</h1>
+        <form action="/favorites/:id" method="POST" >
+          <button type="submit" class="fav_button">Add To Fav</button>
+        </form>
+      </div>
+
+      <div class="map">
+
+      </div>
+
+    </div>
+    <div class="maps_right">
+      <a href="/map:id">
+        <p>Example Map Title</p>
+      </a>
+      <a href="/map:id">
+        <p>Example Map Title</p>
+      </a>
+      <a href="/map:id">
+        <p>Example Map Title</p>
+      </a>
+      <a href="/map:id">
+        <p>Example Map Title</p>
+      </a>
     </div>
   </div>
+
 </body>
 
 
