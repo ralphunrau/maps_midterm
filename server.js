@@ -44,6 +44,7 @@ const mapsRoutes = require("./routes/maps.js");
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/maps", mapsRoutes(db));
+app.use("/profiles", mapsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
