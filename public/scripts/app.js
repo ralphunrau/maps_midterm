@@ -5,7 +5,8 @@
   // This will render the map
   // .setView should have details provided by user - will have to update schema ([map center lat/lng], zoom)
 
-  const userMap = L.map('.map').setView([51.505, -0.09], 13);
+  const theMap = $('.map');
+  const userMap = L.map(theMap).setView([51.505, -0.09], 13);
 
   // This is what shows the road layer on the map
 
