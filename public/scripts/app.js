@@ -1,7 +1,7 @@
 // Client facing scripts here
 (() => {
 
-
+  $("NAME OF SLIDE OUT").hide();
   // This will render the map
   // .setView should have details provided by user - will have to update schema ([map center lat/lng], zoom)
   const userMap = L.map('.map').setView([51.505, -0.09], 13);
@@ -23,6 +23,10 @@
 
   const makeMarker = () =>{
     const pointLatLng = //latlng info
+    const pointTitle = //title info
     L.marker([pointLatLng]).addTo(userMap);
+    marker.bindPopup(`${pointTitle}`).openPopup();
+    marker.addEventListener()
+    $("NAME OF SLIDE OUT").show();
   }
 });
