@@ -67,9 +67,15 @@ app.use("/login", loginRoute(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+<<<<<<< HEAD
 // app.get("/", (req, res) => {
 //   res.render("faves");
 // });
+=======
+/* app.get("/", (req, res) => {
+  res.render("map_create");
+}); */
+>>>>>>> master
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
