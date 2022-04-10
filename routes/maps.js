@@ -10,11 +10,7 @@ module.exports = (db) => {
       .then(data => {
         const maps = data.rows;
         // res.json({ maps });
-<<<<<<< HEAD
         res.render('index');
-=======
-        res.render('map_view');
->>>>>>> master
       })
       .catch(err => {
         res
