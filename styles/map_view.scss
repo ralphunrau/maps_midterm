@@ -12,7 +12,7 @@ body {
       .map {
         width: 100%;
         height: 550px;
-        background-color: rgb(79, 132, 202);
+        // background-color: rgb(79, 132, 202);
 
         .point_search {
           position: absolute;
@@ -38,7 +38,8 @@ body {
           border: solid #000;
           border-width: thin;
           position: absolute;
-          background-color: rgb(37, 96, 172);
+          // background-color: rgb(37, 96, 172);
+          background-color: transparent;
 
           img {
             width: 80%;
@@ -50,10 +51,6 @@ body {
             margin-left: 5px;
           }
         }
-      }
-
-      .fav_button {
-
       }
 
       .title_favorite {
@@ -78,3 +75,5 @@ body {
     }
   }
 }
+
+#map { height: 800px; }
