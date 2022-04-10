@@ -1,15 +1,14 @@
 .header_div {
   width: 100%;
-  background-color: rgb(82, 189, 238);
+  background-color: white;
   height: 130px;
   padding: 10px;
 }
 
 body {
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
+  flex-direction: column;
 }
 
 nav {
@@ -18,6 +17,7 @@ nav {
   flex-direction: row;
   width: 100%;
   height: 100%;
+  background-color: rgb(82, 189, 238);
 }
 
 .maps_profile {
@@ -30,6 +30,7 @@ nav {
   flex-direction: row;
   padding-right: 20px;
   align-items: center;
+  justify-content: flex-end;
 
   #reg_button {
     margin-left: 20px;

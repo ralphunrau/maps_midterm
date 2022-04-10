@@ -4,23 +4,39 @@
 <head>
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/index.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 
 <body>
-  <header>
   <%- include('partials/_header') %>
-  </header>
-  <h1>Welcome to Maps !</h1>
-  <article>
-    <img alt="img" width="50px" length="50px">
-    <p>
-      Temp
-    </p>
+  <div class="title">
+    <h1>Welcome to Maps !</h1>
+    <a href="/maps/create"> Create Map </a>
+  </div>
+
+  <article class="content">
+    <img src=../images/jpg.png>
+    <div>
+      <a href="/id"><h3>Title: Best Places to Eat!</h3></a>
+      <p>
+        Description: <br>
+        Other:
+      </p>
+    </div>
+  </article>
+
+  <article class="content">
+    <img src=../images/jpg.png>
+    <div>
+      <a href="/id"><h3>Title: Best Places to Eat!</h3></a>
+      <p>
+        Description: <br>
+        Other:
+      </p>
+    </div>
   </article>
 </body>
 

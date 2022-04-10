@@ -14,15 +14,15 @@
 <body>
   <%- include('partials/_header') %>
   <div class="title">
-    <h1>My Genius Creations</h1>
+    <h1>My Absolute FAVORITES</h1>
     <a href="/maps/create"> Create Map </a>
-    <a href="/maps/faves"> My Faves </a>
+    <a href="/maps/profiles"> Created by Me </a>
   </div>
 
   <article class="content">
     <img src=../images/jpg.png>
     <div class="container">
-      <a href="/id"><h3>Title: I Created This 1</h3></a>
+      <a href="/id"><h3>Title: Favorite 1</h3></a>
       <div id="content_delete">
         <p>
           Description: <br>
@@ -39,14 +39,14 @@
   <article class="content">
     <img src=../images/jpg.png>
     <div class="container">
-      <a href="/id"><h3>Title: I Created This 2</h3></a>
+      <a href="/id"><h3>Title: Favorite 2</h3></a>
       <div id="content_delete">
         <p>
           Description: <br>
           Address:<br>
           Other:
         </p>
-        <form method="POST" action="/profiles/:id/delete">
+        <form method="POST" action="/favorites/:id/delete">
           <button> Poof </button>
         </form>
       </div>
