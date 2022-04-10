@@ -53,29 +53,18 @@ const loginRoute = require("./routes/login.js");
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/maps", mapsRoutes(db));
-<<<<<<< HEAD
-app.use("/profiles", mapsRoutes(db));
-app.use("/", mapsRoutes(db));
-=======
 app.use("/profiles", profileRoutes(db));
-app.use("/favourites", favouritesRoutes(db));
+app.use("/favourites", favouritesRoutes(db))
 app.use("/login", loginRoute(db));
->>>>>>> master
 // Note: mount other resources here, using the same pattern above
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-<<<<<<< HEAD
-// app.get("/", (req, res) => {
-//   res.render("faves");
-// });
-=======
-/* app.get("/", (req, res) => {
-  res.render("map_create");
-}); */
->>>>>>> master
+app.get("/", (req, res) => {
+  res.render("index");
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
