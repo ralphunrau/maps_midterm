@@ -54,7 +54,7 @@ app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/maps", mapsRoutes(db));
 app.use("/profiles", profileRoutes(db));
-app.use("/favorites", favouritesRoutes(db));
+app.use("/favourites", favouritesRoutes(db))
 app.use("/login", loginRoute(db));
 // Note: mount other resources here, using the same pattern above
 

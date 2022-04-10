@@ -24,7 +24,7 @@ module.exports = (db) => {
     db.query(`SELECT * FROM maps WHERE active = true AND id = $1 ORDER BY created_on;`, [mapID])
       .then(data => {
         const maps = data.rows;
-        // res.json({ maps });
+        // let templateVars = res.json({ maps });
         res.render('map_view');
       })
       .catch(err => {
