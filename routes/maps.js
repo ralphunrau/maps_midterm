@@ -9,7 +9,6 @@ module.exports = (db) => {
     db.query(`SELECT * FROM maps WHERE active = true ORDER BY created_on;`)
       .then(data => {
         const maps = data.rows;
-        // res.json({ maps });
         res.render('index');
       })
       .catch(err => {
