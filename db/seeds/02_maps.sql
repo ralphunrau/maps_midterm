@@ -1,8 +1,8 @@
-INSERT INTO maps (user_id, title)
+INSERT INTO maps (user_id, lng, lat, title)
 VALUES
-( 1,'Great Food Spots'),
-( 2,'Great Beer Spots'),
-( 3,'Great Hiking Spots'),
-( 4,'Great Ice Cream Spots'),
-( 1,'Great Nightclubs'),
-( 2,'Great Surfing Spots');
+( 1,49.28249, -123.127576, 'Great Food Spots'),
+( 2,49.28249, -123.127576,'Great Beer Spots'),
+( 3,49.28249, -123.127576,'Great Hiking Spots'),
+( 4,49.28249, -123.127576,'Great Ice Cream Spots'),
+( 1,49.28249, -123.127576,'Great Nightclubs'),
+( 2,49.027296, -125.665175,'Great Surfing Spots');
