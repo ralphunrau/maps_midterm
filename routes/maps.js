@@ -20,23 +20,8 @@ module.exports = (db) => {
 
   // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
   router.get("/:id", (req, res) => {
-    const mapID = req.params.id;
-    db.query(`SELECT * FROM maps WHERE active = true AND id = $1 ORDER BY created_on;`, [mapID])
-      .then(data => {
-        const obj = data.rows[0];
-        const templateVars = {
-          title: obj.title,
-          lat: obj.lat,
-          lng: obj.lng,
-          zoom: obj.zoom
-        };
-        res.render('map_view', templateVars);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+    const id = req.params.id;
+    res.render('map_view', {id})
   });
 
   //EDITS SELECTED VALUES IN ROW ON POINT TABLE
