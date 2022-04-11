@@ -23,9 +23,14 @@ module.exports = (db) => {
     const mapID = req.params.id;
     db.query(`SELECT * FROM maps WHERE active = true AND id = $1 ORDER BY created_on;`, [mapID])
       .then(data => {
-        const maps = data.rows;
-        // let templateVars = res.json({ maps });
-        res.render('map_view');
+        const obj = data.rows[0];
+        const templateVars = {
+          title: obj.title,
+          lat: obj.lat,
+          lng: obj.lng,
+          zoom: obj.zoom
+        };
+        res.render('map_view', templateVars);
       })
       .catch(err => {
         res

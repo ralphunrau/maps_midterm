@@ -1,12 +1,26 @@
 // Client facing scripts here
-// (() => {
+
+
+
+
 $(document).ready(function () {
 
   //test code
   const oj = {
     lng: 49.1535231,
     lat: -123.1354653
-  }
+  };
+
+  const path = window.location.pathname;
+  const mapID = path.slice(-1);//maybe add if statement with default if not num
+
+  $.ajax({
+    type: "GET",
+    url: `/maps/${mapID}`,
+  }).then((data) => {
+    console.log("this is from app.js",data);
+  });
+
 
   // This is what shows the road layer on the map
 

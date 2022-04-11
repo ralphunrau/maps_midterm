@@ -21,12 +21,14 @@
 <body>
 
   <%- include('partials/_header') %>
-
+  <scipt>
+    const map = L.map('map').setView(<%- title %>, <%- title %>], 13);
+  </scipt>
   <div class="maps_joined">
     <div class="maps_left">
 
       <div class="title_favorite">
-        <h1>Example Map Title</h1>
+        <h1><%- title %></h1>
         <form action="/favorites/:id" method="POST" >
           <button type="submit" class="fav_button">Add To Fav</button>
         </form>
