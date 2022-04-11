@@ -14,12 +14,12 @@ $(document).ready(function () {
   const path = window.location.pathname;
   const mapID = path.slice(-1);//maybe add if statement with default if not num
 
-  $.ajax({
-    type: "GET",
-    url: `/maps/${mapID}`,
-  }).then((data) => {
-    console.log("this is from app.js",data);
-  });
+  // $.ajax({
+  //   type: "GET",
+  //   url: `/maps/${mapID}`,
+  // }).then((data) => {
+  //   console.log("this is from app.js",data);
+  // });
 
 
   // This is what shows the road layer on the map
