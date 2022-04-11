@@ -8,7 +8,8 @@ module.exports = (db) => {
     db.query(`SELECT * FROM maps JOIN favourites ON maps.id = favourites.map_id JOIN users ON users.id = favourites.user_id WHERE favourites.active = true AND favourites.user_id = $1 ORDER BY favourites.created_on;`, [userID])
       .then(data => {
         const users = data.rows;
-        res.json({users});
+        // res.json({users});
+        res.render('faves');
       })
       .catch(err => {
         res

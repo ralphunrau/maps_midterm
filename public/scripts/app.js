@@ -12,7 +12,7 @@ $(document).ready(function () {
   };
 
   const path = window.location.pathname;
-  const mapID = path.slice(-1);//maybe add if statement with default if not num
+  const mapID = path.slice(-1);
 
   // $.ajax({
   //   type: "GET",
