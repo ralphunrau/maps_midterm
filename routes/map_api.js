@@ -9,7 +9,7 @@ module.exports = (db) => {
     const mapID = req.params.id;
     db.query(`SELECT * FROM maps JOIN points ON maps.id = points.map_id WHERE maps.id = $1 AND maps.active = true AND points.active = true ORDER BY maps.created_on;`, [mapID])
       .then(data => {
-        const map = data.rows;
+        const map = data.rows[0];
         console.log(map);
         res.json(map);
       })
