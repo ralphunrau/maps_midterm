@@ -1,4 +1,4 @@
-INSERT INTO points (map_id,lng, lat, title, description, point_url)
+INSERT INTO points (map_id,point_lng, point_lat, point_title, description, point_url)
 VALUES
 (1, 49.28306, -123.135581, 'Nice Restaurant', 'This is the description ', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Ffood&psig=AOvVaw1jOH4Z8XLwfevESvPCWeFw&ust=1649564509665000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCMCe6-aQhvcCFQAAAAAdAAAAABAD'),
 (1, 49.283333,-123.107147, 'Another Very Nice Restaurant', 'This is the description', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.medicalnewstoday.com%2Farticles%2Fmsg-symptom-complex-what-you-need-to-know&psig=AOvVaw1jOH4Z8XLwfevESvPCWeFw&ust=1649564509665000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCMCe6-aQhvcCFQAAAAAdAAAAABAP'),

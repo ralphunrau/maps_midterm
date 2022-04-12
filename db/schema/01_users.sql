@@ -6,5 +6,5 @@ CREATE TABLE users (
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL, /* Storing as plain text password as this is proof of concept, user login security may be implimented at a later dat NCM*/
   profile_url VARCHAR(255) NOT NULL,
-  active  BOOLEAN NOT NULL DEFAULT TRUE
+  user_active  BOOLEAN NOT NULL DEFAULT TRUE
 );
