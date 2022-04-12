@@ -13,7 +13,11 @@ $(document).ready(function () {
         let lat = point.point_lat;
         let lng = point.point_lng;
         L.marker([lng, lat]).addTo(map)
+<<<<<<< HEAD
           .bindPopup(`${point.point_title}<br>${point.point_description}`)
+=======
+          .bindPopup(`${point.point_title}<br>${point.map_description}`)
+>>>>>>> master
           .openPopup();
 
         // const corner1 = L.latLng(lat + 0.02, lng + 0.02),

@@ -4,6 +4,7 @@ const router = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const id = req.session.userId;
+    console.log("userid 2:", id);
     db.query(`SELECT maps.* FROM maps
     JOIN favourites ON maps.id = favourites.map_id
     JOIN users ON users.id = favourites.user_id
