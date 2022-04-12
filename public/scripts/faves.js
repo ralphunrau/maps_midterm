@@ -1,5 +1,6 @@
-$(document).ready(function () {
-  $.get(`/api/index`)
+$(document).ready(function() {
+
+  $.get(`/api/faves`)
     .then(data => {
       for (const map of data) {
         console.log(map);
@@ -16,6 +17,7 @@ $(document).ready(function () {
             </p>
           </div>`;
           const newItem = article.append(itemContent);
+          console.log(">>>>>",newItem); //**** */
           return newItem;
         };
         mapsItem(map);
