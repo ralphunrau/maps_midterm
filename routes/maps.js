@@ -3,19 +3,12 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
+  // .addClass("content");
+  // const item = $("article").addClass("content");
 
   // RETURNS TABLE OF ALL MAPS
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM maps WHERE active = true ORDER BY created_on;`)
-      .then(data => {
-        const maps = data.rows;
-        res.render('index');
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+    res.render('index');
   });
 
   // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
