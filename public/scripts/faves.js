@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
   $.get(`/api/faves`)
     .then(data => {
       for (const map of data) {
