@@ -17,9 +17,9 @@ module.exports = (db) => {
   });
 
  // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
- router.get("/:id", (req, res) => {
-   const id = req.params.id;
-  res.render('map_view', {id});
+  router.get("/:id", (req, res) => {
+    const id = req.params.id;
+    res.render('map_view', {id});
 });
 
   //Updates points table with new point
@@ -87,7 +87,10 @@ module.exports = (db) => {
       });
   });
 
-
+  router.post("/add/:lat/:lng", (req, res) => {
+    console.log(req.params.lat, req.params.lng, req.body);
+    res.render();
+  })
 
 
 
