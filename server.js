@@ -50,7 +50,7 @@ const mapApiRoutes = require("./routes/map_api.js");
 const indexApiRoutes = require("./routes/index_api.js");
 const profileApiRoutes = require("./routes/profile_api.js");
 const favesApiRoutes = require("./routes/faves_api.js");
-// const loginRoute = require("./routes/login.js");
+const loginRoute = require("./routes/login.js");
 // const logoutRoute = require("./routes/logout.js");
 
 // Mount all resource routes
@@ -63,7 +63,7 @@ app.use("/api/maps", mapApiRoutes(db));
 app.use("/api/index", indexApiRoutes(db));
 app.use("/api/profile", profileApiRoutes(db));
 app.use("/api/faves", favesApiRoutes(db));
-// app.use("/login", loginRoute(db));
+app.use("/login", loginRoute(db));
 // app.use("/logout", logoutRoute(db));
 // Note: mount other resources here, using the same pattern above
 

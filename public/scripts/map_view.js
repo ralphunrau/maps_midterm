@@ -1,9 +1,13 @@
+
+
 $(document).ready(function () {
   $.get(`/api/maps/${id}`)
     .then(data => {
-
+      console.log(data);
+      const maplat = "-123.127576";
+      const maplng = "49.28249";
       $('#mapTitle').html(data[0].map_title);
-      const map = L.map('map').setView([data[0].map_lng, data[0].map_lat], 13);
+      const map = L.map('map').setView([maplat, maplng], 13);
       L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`).addTo(map);
 
       for (const point of data) {
@@ -17,10 +21,10 @@ $(document).ready(function () {
         // corner2 = L.latLng(lat - 0.02, lng - 0.02),
         // bounds = L.latLngBounds(corner1, corner2);
         // L.imageOverlay(`${point.point_url}`, bounds)
-        }
-        const popup = L.popup();
-        const onMapClick = (e) => {
-        L.marker([e.latlng.lat, e.latlng.lng]).addTo(map)
+      }
+      const popup = L.popup();
+      const onMapClick = (e) => {
+        L.marker([e.latlng.lat, e.latlng.lng])
           .bindPopup('A point of interest.')
           .openPopup();
         popup
@@ -28,21 +32,24 @@ $(document).ready(function () {
           .setContent(`You clicked the map at ${e.latlng.lat}, ${e.latlng.lng}. Give this point some information:`)
           .openOn(map);
         const popupForm = $(`
-          <form class ='pointCreationForm' action='/maps/add/${e.latlng.lat}/${e.latlng.lng}' method='POST'>
+          <form class ='pointCreationForm' action='/maps/add/${e.latlng.lng}/${e.latlng.lat}/${data[0].id}' method='POST'>
             <div><textarea name='title' placeholder ='Enter a title:' style='height: 20px;'></textarea></div>
             <div><textarea name='description' placeholder ='Enter a description:' style='height: 40px;'></textarea></div>
             <div><textarea name='image' placeholder ='Enter a image url:' style='height: 20px;'></textarea></div>
-            <button class='sumbit'>Sumbit</button>
+            <button class='submit'>Sumbit</button>
           </form>
-        `)
+        `);
         $('.leaflet-popup-content').append(popupForm);
-        }
-        const button = $('.pointCreationForm');
-        map.on('click', onMapClick);
-        button.submit( function (event) {
-          event.preventDefault();
-          console.log('23');
-        })
+      };
+      // const submitform = $('.pointCreationForm');
+      // map.on('click', onMapClick);
+      // submitform.submit(function() {
+      //   // event.preventDefault();
+      //   // L.marker([e.latlng.lat, e.latlng.lng]).addTo(map)
+      //   //   .bindPopup('A point of interest.')
+      //   //   .closePopup();
+      //   console.log('23');
+      // });
     });
 
   $.get('/api/maps')
