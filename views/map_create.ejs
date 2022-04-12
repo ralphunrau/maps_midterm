@@ -6,7 +6,7 @@
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/map_view.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/map_create.css" type="text/css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
   crossorigin=""/> <!-- leaflet -->
@@ -27,9 +27,6 @@
 
       <div class="title_favorite">
         <h1>Create Map</h1>
-        <form action="/favorites/:id" method="POST" >
-          <button type="submit" class="fav_button">Add To Fav</button>
-        </form>
       </div>
 
       <div id="map">
@@ -37,31 +34,15 @@
             <textarea placeholder="Search For Point: "></textarea>
             <i class="fa-solid fa-magnifying-glass fa-lg"></i>
           </form>
-          <div class="point_info">
-            <img src="./icons8-martian-480.png" alt="Image of Point">
-            <p>Name</p>
-            <p>Address</p>
-            <p>Edit</p>
-            <p>Add</p>
-            <p>Delete</p>
-          </div>
       </div>
 
     </div>
-    <div class="maps_right">
-      <a href="/map:id">
-        <h3>Example Map Title</h3>
-      </a>
-      <a href="/map:id">
-        <h3>Example Map Title</h3>
-      </a>
-      <a href="/map:id">
-        <h3>Example Map Title</h3>
-      </a>
-      <a href="/map:id">
-        <h3>Example Map Title</h3>
-      </a>
-    </div>
+    <form class="map_and_point_form">
+      <div><textarea placeholder="Enter the Map's name:"></textarea></div>
+      <div><textarea placeholder="Enter the Map's description:"></textarea></div>
+      <div><textarea placeholder="Enter a url for a Map image:"></textarea></div>
+      <button type="submit">Submit</button>
+    </form>
   </div>
 
 </body>
