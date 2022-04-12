@@ -12,9 +12,14 @@ module.exports = (db) => {
   });
 
   // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
+  router.get("/create", (req, res) => {
+    res.render('map_create');
+  });
+
+  // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
   router.get("/:id", (req, res) => {
     const id = req.params.id;
-    res.render('map_view', {id})
+    res.render('map_view', {id});
   });
 
   //EDITS SELECTED VALUES IN ROW ON POINT TABLE
