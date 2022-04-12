@@ -7,7 +7,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
-    req.session.user_id = req.params.id;
+    req.session.userId = req.body.username;
     res.redirect('/profiles');
   });
   return router;
