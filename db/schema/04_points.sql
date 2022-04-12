@@ -6,7 +6,7 @@ CREATE TABLE points (
   point_lat numeric NOT NULL,
   point_lng numeric NOT NULL,
   point_title VARCHAR(255) NOT NULL,
-  description text,
+  point_description text,
   point_url VARCHAR(500) NOT NULL,
   point_created_on TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
   point_active  BOOLEAN NOT NULL DEFAULT TRUE

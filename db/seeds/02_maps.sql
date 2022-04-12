@@ -1,4 +1,4 @@
-INSERT INTO maps (user_id, map_lng, map_lat, map_title)
+INSERT INTO maps (user_id, map_lng, map_lat, map_title, map_pic_url,map_description)
 VALUES
 ( 1,49.28249, -123.127576, 'Great Food Spots'),
 ( 2,49.28249, -123.127576,'Great Beer Spots'),
