@@ -19,8 +19,8 @@ module.exports = (db) => {
 
   // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
   router.get("/:id", (req, res) => {
-    console.log("in here");
     const mapID = req.params.id;
+    console.log("this should be 5:", mapID);
     db.query(`SELECT *
     FROM maps
     JOIN points

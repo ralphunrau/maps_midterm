@@ -4,17 +4,16 @@ $(document).ready(function () {
   $.get(`/api/maps/${id}`)
     .then(data => {
       console.log(data);
-      const maplat = "-123.127576";
-      const maplng = "49.28249";
+
       $('#mapTitle').html(data[0].map_title);
-      const map = L.map('map').setView([maplat, maplng], 13);
+      const map = L.map('map').setView([data[0].map_lat, data[0].map_lng], 13);
       L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`).addTo(map);
 
       for (const point of data) {
         let lat = point.point_lat;
         let lng = point.point_lng;
         L.marker([lng, lat]).addTo(map)
-          .bindPopup(`${point.point_title}<br>${point.description}`)
+          .bindPopup(`${point.point_title}<br>${point.point_description}`)
           .openPopup();
 
         // const corner1 = L.latLng(lat + 0.02, lng + 0.02),

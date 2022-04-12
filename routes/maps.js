@@ -16,11 +16,11 @@ module.exports = (db) => {
     res.render('map_create');
   });
 
- // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
- router.get("/:id", (req, res) => {
-   const id = req.session.userId;
-  res.render('map_view', {id});
-});
+  // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
+  router.get("/:id", (req, res) => {
+    const id = req.params.id;
+    res.render('map_view', {id});
+  });
 
   //Updates points table with new point
   router.post("/add/:lat/:lng/:id", (req, res) => {
