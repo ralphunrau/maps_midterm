@@ -15,10 +15,11 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
-  })
+  });
 
   // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
   router.get("/:id", (req, res) => {
+    console.log("in here");
     const mapID = req.params.id;
     db.query(`SELECT *
     FROM maps
