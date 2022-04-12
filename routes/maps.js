@@ -64,7 +64,10 @@ module.exports = (db) => {
       });
   });
 
-
+  router.post("/add/:lat/:lng", (req, res) => {
+    console.log(req.params.lat, req.params.lng, req.body);
+    res.render('map_view')
+  })
 
 
 
