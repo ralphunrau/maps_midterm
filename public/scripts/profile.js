@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $.get(`/api/index`)
+  $.get(`/api/profile/`)
     .then(data => {
       for (const map of data) {
         console.log(map);

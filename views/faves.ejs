@@ -6,9 +6,16 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/index.css" type="text/css" />
   <link rel="stylesheet" href="/styles/profile.css" type="text/css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/> <!-- leaflet -->
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/faves.js"></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script> <!-- leaflet -->
+  <script> const id = <%= id %> </script>
 </head>
 
 <body>
@@ -19,39 +26,6 @@
     <a href="/maps/profiles"> Created by Me </a>
   </div>
 
-  <article class="content">
-    <img src=../images/jpg.png>
-    <div class="container">
-      <a href="/id"><h3>Title: Favorite 1</h3></a>
-      <div id="content_delete">
-        <p>
-          Description: <br>
-          Address:<br>
-          Other:
-        </p>
-        <form method="POST" action="/profiles/:id/delete">
-          <button> Poof </button>
-        </form>
-      </div>
-    </div>
-  </article>
-
-  <article class="content">
-    <img src=../images/jpg.png>
-    <div class="container">
-      <a href="/id"><h3>Title: Favorite 2</h3></a>
-      <div id="content_delete">
-        <p>
-          Description: <br>
-          Address:<br>
-          Other:
-        </p>
-        <form method="POST" action="/favorites/:id/delete">
-          <button> Poof </button>
-        </form>
-      </div>
-    </div>
-  </article>
 </body>
 
 

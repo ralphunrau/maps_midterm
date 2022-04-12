@@ -8,5 +8,7 @@ CREATE TABLE maps (
   map_lng numeric NOT NULL,
   map_zoom smallint NOT NULL DEFAULT 13,
   map_created_on TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
-  map_active  BOOLEAN NOT NULL DEFAULT TRUE
+  map_active  BOOLEAN NOT NULL DEFAULT TRUE,
+  map_pic_url VARCHAR(500) DEFAULT 'https://www.rei.com/dam/270_a_2014_topo_map_lg.jpg',
+  map_description VARCHAR(1000) NOT NULL
 );
