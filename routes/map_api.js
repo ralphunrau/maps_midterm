@@ -7,10 +7,23 @@ module.exports = (db) => {
   // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
   router.get("/:id", (req, res) => {
     const mapID = req.params.id;
-    db.query(`SELECT * FROM maps JOIN points ON maps.id = points.map_id WHERE maps.id = $1 AND maps.active = true AND points.active = true ORDER BY maps.created_on;`, [mapID])
+    db.query(`SELECT *
+    FROM maps
+    JOIN points
+    ON maps.id = points.map_id
+    WHERE maps.id = $1
+    AND maps.map_active = true
+    AND points.point_active = true
+    ORDER BY map_created_on;`, [mapID])
       .then(data => {
+<<<<<<< HEAD
         const map = data.rows[0];
         console.log(map);
+=======
+
+        const map = data.rows;
+
+>>>>>>> c567b5ab92cee4513560d2cf8555794c69ceb38e
         res.json(map);
       })
       .catch(err => {
