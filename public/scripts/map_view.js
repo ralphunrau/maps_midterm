@@ -1,9 +1,10 @@
-
-
 $(document).ready(function () {
+  // let map_id = '';
+
   $.get(`/api/maps/${id}`)
     .then(data => {
-      console.log(data);
+      // map_id = id;
+
       const maplat = "-123.127576";
       const maplng = "49.28249";
       $('#mapTitle').html(data[0].map_title);
@@ -14,7 +15,7 @@ $(document).ready(function () {
         let lat = point.point_lat;
         let lng = point.point_lng;
         L.marker([lng, lat]).addTo(map)
-          .bindPopup(`${point.point_title}<br>${point.description}`)
+          .bindPopup(`${point.point_title}<br>${point.point_description}`)
           .openPopup();
 
         // const corner1 = L.latLng(lat + 0.02, lng + 0.02),
@@ -41,8 +42,8 @@ $(document).ready(function () {
         `);
         $('.leaflet-popup-content').append(popupForm);
       };
+      map.on('click', onMapClick);
       // const submitform = $('.pointCreationForm');
-      // map.on('click', onMapClick);
       // submitform.submit(function() {
       //   // event.preventDefault();
       //   // L.marker([e.latlng.lat, e.latlng.lng]).addTo(map)
@@ -50,9 +51,14 @@ $(document).ready(function () {
       //   //   .closePopup();
       //   console.log('23');
       // });
+
+      // addToFav.on('click', ()=> {
+      //   console.log('23');
+      // })
+
     });
 
-  $.get('/api/maps')
+    $.get('/api/maps')
     .then(maps => {
       for (const map of maps) {
         const mapsItem = function (map) {
@@ -60,13 +66,18 @@ $(document).ready(function () {
           $(".maps_right").append(division);
           const itemContent = `
           <a href="/maps/${map.id}">
-            <h2>${map.map_title}</h2>
+          <h2>${map.map_title}</h2>
           </a>
-            `
+          `
           const newMap = division.append(itemContent);
           return newMap;
         }
         mapsItem(map);
       }
     })
+
+    // $('.fav_button').click(function () {
+
+    // })
+
 });
