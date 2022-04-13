@@ -20,7 +20,7 @@ module.exports = (db) => {
   router.get("/:id", (req, res) => {
     const id = req.params.id;
     res.render('map_view', {id});
-});
+  });
 
   //Updates points table with new point
   router.post("/add/:lat/:lng/:id", (req, res) => {

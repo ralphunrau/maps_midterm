@@ -3,19 +3,28 @@ $(document).ready(function () {
 
   $.get(`/api/maps/${id}`)
     .then(data => {
+<<<<<<< HEAD
       // map_id = id;
 
       const maplat = "-123.127576";
       const maplng = "49.28249";
+=======
+      console.log(data);
+
+>>>>>>> 00e75cf29540b0b90248cfad806e0660eb254f70
       $('#mapTitle').html(data[0].map_title);
-      const map = L.map('map').setView([maplat, maplng], 13);
+      const map = L.map('map').setView([data[0].map_lat, data[0].map_lng], 13);
       L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`).addTo(map);
 
       for (const point of data) {
         let lat = point.point_lat;
         let lng = point.point_lng;
         L.marker([lng, lat]).addTo(map)
+<<<<<<< HEAD
           .bindPopup(`${point.point_title}<br>${point.point_description}`)
+=======
+          .bindPopup(`${point.point_title}<br>${point.point_description}<br><img src="${point.point_url} width="100" height="100"">`)
+>>>>>>> 00e75cf29540b0b90248cfad806e0660eb254f70
           .openPopup();
 
         // const corner1 = L.latLng(lat + 0.02, lng + 0.02),
@@ -42,6 +51,7 @@ $(document).ready(function () {
         `);
         $('.leaflet-popup-content').append(popupForm);
       };
+<<<<<<< HEAD
       map.on('click', onMapClick);
       // const submitform = $('.pointCreationForm');
       // submitform.submit(function() {
@@ -56,6 +66,17 @@ $(document).ready(function () {
       //   console.log('23');
       // })
 
+=======
+      const submitform = $('.pointCreationForm');
+      map.on('click', onMapClick);
+      submitform.submit(function() {
+        // event.preventDefault();
+        // L.marker([e.latlng.lat, e.latlng.lng]).addTo(map)
+        //   .bindPopup('A point of interest.')
+        //   .closePopup();
+        console.log('23');
+      });
+>>>>>>> 00e75cf29540b0b90248cfad806e0660eb254f70
     });
 
     $.get('/api/maps')
