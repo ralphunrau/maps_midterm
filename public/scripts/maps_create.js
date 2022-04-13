@@ -3,11 +3,24 @@ $(document).ready(function() {
   L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`).addTo(map);
 
   const popup = L.popup();
-  function onMapClick(e){
+  const onMapClick = (e) => {
+    L.marker([e.latlng.lat, e.latlng.lng])
+      .bindPopup('A point of interest.')
+      .openPopup();
     popup
       .setLatLng(e.latlng)
-      .setContent("You clicked the map at " + e.latlng.toString())
+      .setContent(`You clicked the map at ${e.latlng.lat}, ${e.latlng.lng}. Give this point some information:`)
       .openOn(map);
-  }
+    const popupForm = $(`
+      <form class ='pointCreationForm' action='/maps/add/${e.latlng.lng}/${e.latlng.lat}/${data[0].id}' method='POST'>
+        <div><textarea name='title' placeholder ='Enter a title:' style='height: 20px;'></textarea></div>
+        <div><textarea name='description' placeholder ='Enter a description:' style='height: 40px;'></textarea></div>
+        <div><textarea name='image' placeholder ='Enter a image url:' style='height: 20px;'></textarea></div>
+        <button class='submit'>Sumbit</button>
+      </form>
+    `);
+    $('.leaflet-popup-content').append(popupForm);
+  };
   map.on('click', onMapClick);
+
 });

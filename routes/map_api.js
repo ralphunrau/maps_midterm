@@ -20,34 +20,14 @@ module.exports = (db) => {
   // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
   router.get("/:id", (req, res) => {
     const mapID = req.params.id;
-<<<<<<< HEAD
-    if (req.params.id > 6) {
-      db.query(`SELECT * FROM maps WHERE maps.id = $1`, [mapID])
-      .then (data => {
-        const map = data.rows;
-        res.json(map);
-      })
-    } else {
-      db.query(`SELECT *
-      FROM maps
-      JOIN points
-      ON maps.id = points.map_id
-      WHERE maps.id = $1
-      AND maps.map_active = true
-      AND points.point_active = true
-      ORDER BY map_created_on;`, [mapID])
-=======
-    console.log("this should be 5:", mapID);
-    db.query(`SELECT *
-    FROM maps
-    JOIN points
-    ON maps.id = points.map_id
-    WHERE maps.id = $1
-    AND maps.map_active = true
-    AND points.point_active = true
-    ORDER BY map_created_on;`, [mapID])
->>>>>>> 2a8c5ea255eb024d7f0e184ed01d418d8fea7819
+    db.query(`SELECT * FROM
+      (SELECT maps.id, maps.user_id, maps.map_title, maps.map_lat, maps.map_lng, maps.map_active, maps.map_description, maps.map_pic_url,
+      maps.map_zoom, maps.map_created_on, points.map_id, points.point_active, points.point_created_on, points.point_description,
+      points.point_lat, points.point_lng, points.point_title, points.point_url
+        FROM maps
+        LEFT OUTER JOIN points ON maps.id = points.map_id) AS sub WHERE sub.id = $1 AND sub.map_active = true AND sub.point_active IS NOT false;`, [mapID])
       .then(data => {
+        console.log(data.rows);
         const map = data.rows;
         res.json(map);
       })
@@ -58,6 +38,6 @@ module.exports = (db) => {
       });
     }
 
-  });
+  );
   return router;
 };

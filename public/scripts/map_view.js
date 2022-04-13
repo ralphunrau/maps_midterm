@@ -3,25 +3,23 @@ $(document).ready(function () {
 
   $.get(`/api/maps/${id}`)
     .then(data => {
+
       console.log('data', data[0]);
       const maplat = "-123.127576";
       const maplng = "49.28249";
-      console.log($('#mapTitle'));
       $('#mapTitle').html(data[0].map_title);
       const map = L.map('map').setView([data[0].map_lat, data[0].map_lng], 13);
       L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`).addTo(map);
 
       for (const point of data) {
+        if (data.point_lat === null) {
+          return;
+        }
         let lat = point.point_lat;
         let lng = point.point_lng;
         L.marker([lng, lat]).addTo(map)
           .bindPopup(`${point.point_title}<br>${point.point_description}<br><img src="${point.point_url} width="100" height="100"">`)
           .openPopup();
-
-        // const corner1 = L.latLng(lat + 0.02, lng + 0.02),
-        // corner2 = L.latLng(lat - 0.02, lng - 0.02),
-        // bounds = L.latLngBounds(corner1, corner2);
-        // L.imageOverlay(`${point.point_url}`, bounds)
       }
       const popup = L.popup();
       const onMapClick = (e) => {
