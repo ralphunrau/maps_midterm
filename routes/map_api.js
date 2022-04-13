@@ -19,16 +19,22 @@ module.exports = (db) => {
 
   // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
   router.get("/:id", (req, res) => {
-    console.log("in here");
     const mapID = req.params.id;
-    db.query(`SELECT *
-    FROM maps
-    JOIN points
-    ON maps.id = points.map_id
-    WHERE maps.id = $1
-    AND maps.map_active = true
-    AND points.point_active = true
-    ORDER BY map_created_on;`, [mapID])
+    if (req.params.id > 6) {
+      db.query(`SELECT * FROM maps WHERE maps.id = $1`, [mapID])
+      .then (data => {
+        const map = data.rows;
+        res.json(map);
+      })
+    } else {
+      db.query(`SELECT *
+      FROM maps
+      JOIN points
+      ON maps.id = points.map_id
+      WHERE maps.id = $1
+      AND maps.map_active = true
+      AND points.point_active = true
+      ORDER BY map_created_on;`, [mapID])
       .then(data => {
         const map = data.rows;
         res.json(map);
@@ -38,6 +44,8 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
+    }
+
   });
   return router;
 };

@@ -1,11 +1,10 @@
-
-
 $(document).ready(function () {
   $.get(`/api/maps/${id}`)
     .then(data => {
-      console.log(data);
+      console.log('data', data[0]);
       const maplat = "-123.127576";
       const maplng = "49.28249";
+      console.log($('#mapTitle'));
       $('#mapTitle').html(data[0].map_title);
       const map = L.map('map').setView([maplat, maplng], 13);
       L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`).addTo(map);
@@ -14,7 +13,7 @@ $(document).ready(function () {
         let lat = point.point_lat;
         let lng = point.point_lng;
         L.marker([lng, lat]).addTo(map)
-          .bindPopup(`${point.point_title}<br>${point.description}`)
+          .bindPopup(`${point.point_title}<br>${point.point_description}`)
           .openPopup();
 
         // const corner1 = L.latLng(lat + 0.02, lng + 0.02),
@@ -41,8 +40,8 @@ $(document).ready(function () {
         `);
         $('.leaflet-popup-content').append(popupForm);
       };
+      map.on('click', onMapClick);
       // const submitform = $('.pointCreationForm');
-      // map.on('click', onMapClick);
       // submitform.submit(function() {
       //   // event.preventDefault();
       //   // L.marker([e.latlng.lat, e.latlng.lng]).addTo(map)
