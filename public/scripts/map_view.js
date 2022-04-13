@@ -18,7 +18,12 @@ $(document).ready(function () {
         let lat = point.point_lat;
         let lng = point.point_lng;
         L.marker([lng, lat]).addTo(map)
-          .bindPopup(`${point.point_title}<br>${point.point_description}<br><img src="${point.point_url} width="100" height="100"">`)
+          .bindPopup(`${point.point_title}<br>${point.point_description}
+          <br><img src="${point.point_url} width="100" height="100"">
+          <form action="/${id}/${point.point_title}/edit" method="POST">
+          <button>EDIT</button></form>
+          <form action='/maps/${id}/${point.point_title}/delete' method="GET">
+          <button>DELETE</button></form>`)
           .openPopup();
       }
       const popup = L.popup();
