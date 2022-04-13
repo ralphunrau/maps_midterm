@@ -16,7 +16,7 @@ module.exports = (db) => {
     res.render('map_create');
   });
 
- // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
+  // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
   router.get("/:id", (req, res) => {
     const id = req.params.id;
     res.render('map_view', {id});
@@ -25,7 +25,7 @@ module.exports = (db) => {
   //Updates points table with new point
   router.post("/add/:lat/:lng/:id", (req, res) => {
     // const id = req.session.userId;
-    console.log(req.params.lat, req.params.lng, req.body, req.params.id);
+    // console.log(req.params.lat, req.params.lng, req.body, req.params.id);
     // res.render('map_view', {id});
     let lat = req.params.lat;
     let lng = req.params.lng;
@@ -49,10 +49,10 @@ module.exports = (db) => {
       [id, lng, lat, title, description, image])
       .then(data => {
         const id = data.rows[0].id;
-        console.log('data.rows', id)
+        console.log('data.rows', id);
         // res.redirect('map_view', {id});
         res.render('map_view', {id});
-      })
+      });
 
     /* db.query(`SELECT * FROM maps WHERE map_title = '${title}'`)
       .then(data => {
@@ -66,7 +66,7 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       }); */
-  })
+  });
 
   //EDITS SELECTED VALUES IN ROW ON POINT TABLE
   router.post("/:id/edit", (req, res) => {
