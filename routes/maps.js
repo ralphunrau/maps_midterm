@@ -34,7 +34,7 @@ module.exports = (db) => {
     let description = req.body.description;
     let image = req.body.image;
     db.query('INSERT INTO points (map_id,point_lng, point_lat, point_title, point_description, point_url) VALUES ($1,$2,$3,$4,$5,$6)',
-      [id,lng,lat, title,description, image]);
+      [id, lng, lat, title, description, image]);
     res.render('map_view', {id});
   });
 
@@ -48,7 +48,7 @@ module.exports = (db) => {
     const pointImage = req.body.pointImage;
     const lat = req.params.lng;
     const lng = req.params.lat;
-    db.query('INSERT INTO maps (user_id, map_lng, map_lat, map_title, map_pic_url,map_description) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *',[userId, lng, lat, mapTitle, mapDescription, mapImage])
+    db.query('INSERT INTO maps (user_id, map_lng, map_lat, map_title, map_description, map_pic_url) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *',[userId, lng, lat, mapTitle, mapDescription, mapImage])
       .then(data=>{
         const id = data.rows[0].id
 
@@ -56,7 +56,7 @@ module.exports = (db) => {
 
         res.render('map_view', {id});
       })
-  })
+  });
 
   //EDITS SELECTED VALUES IN ROW ON POINT TABLE
   router.post("/:id/edit", (req, res) => {
