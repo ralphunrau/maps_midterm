@@ -4,8 +4,8 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    const id = req.session.userId;
-    res.render('faves', {id});
+    const user_id = req.session.userId;
+    res.render('faves', {user_id});
   });
 
   router.post("/:id", (req, res) => {
