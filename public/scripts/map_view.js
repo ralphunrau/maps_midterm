@@ -3,10 +3,17 @@ $(document).ready(function () {
 
   $.get(`/api/maps/${id}`)
     .then(data => {
+<<<<<<< HEAD
 
       console.log('data', data[0]);
       const maplat = "-123.127576";
       const maplng = "49.28249";
+=======
+      console.log('data', data[0]);
+      const maplat = "-123.127576";
+      const maplng = "49.28249";
+      console.log($('#mapTitle'));
+>>>>>>> f405546fb7f0f8351c5d91e3eb9def8cbb5485a1
       $('#mapTitle').html(data[0].map_title);
       const map = L.map('map').setView([data[0].map_lat, data[0].map_lng], 13);
       L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`).addTo(map);
@@ -18,7 +25,11 @@ $(document).ready(function () {
         let lat = point.point_lat;
         let lng = point.point_lng;
         L.marker([lng, lat]).addTo(map)
+<<<<<<< HEAD
           .bindPopup(`${point.point_title}<br>${point.point_description}<br><img src="${point.point_url} width="100" height="100"">`)
+=======
+          .bindPopup(`${point.point_title}<br>${point.point_description}`)
+>>>>>>> f405546fb7f0f8351c5d91e3eb9def8cbb5485a1
           .openPopup();
       }
       const popup = L.popup();
