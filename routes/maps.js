@@ -50,12 +50,20 @@ module.exports = (db) => {
     const lng = req.params.lat;
     db.query('INSERT INTO maps (user_id, map_lng, map_lat, map_title, map_description, map_pic_url) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *',[userId, lng, lat, mapTitle, mapDescription, mapImage])
       .then(data=>{
-        const id = data.rows[0].id
+        const id = data.rows[0].id;
 
         db.query(`INSERT INTO points (map_id,point_lng, point_lat, point_title, point_description, point_url) VALUES ($1, $2, $3, $4, $5, $6)`, [id, lng, lat, pointTitle, pointDescription, pointImage])
 
         res.render('map_view', {id});
-      })
+      });
+  });
+  // DELETE SELECTED POINT FROM MAP
+
+  router.post("/:id/:point_title/delete", (req, res) =>{
+    const id = req.params.id;
+    const titleId = req.params.point_title;
+    db.query(`UPDATE points SET point_active = false WHERE point_title = $1`, [titleId]);
+    res.render("map_view", {id});
   });
 
   //EDITS SELECTED VALUES IN ROW ON POINT TABLE
@@ -108,7 +116,7 @@ module.exports = (db) => {
   router.post("/add/:lat/:lng", (req, res) => {
     console.log(req.params.lat, req.params.lng, req.body);
     res.render();
-  })
+  });
 
 
 
