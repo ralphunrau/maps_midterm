@@ -22,6 +22,7 @@ $(document).ready(function () {
           .openPopup();
       }
       const popup = L.popup();
+
       const onMapClick = (e) => {
         L.marker([e.latlng.lat, e.latlng.lng])
           .bindPopup('A point of interest.')
