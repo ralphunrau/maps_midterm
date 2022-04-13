@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
   const map = L.map('map').setView([49.286796, -123.129427],60);
   L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`).addTo(map);
@@ -10,4 +9,5 @@ $(document).ready(function() {
       .setContent("You clicked the map at " + e.latlng.toString())
       .openOn(map);
   }
+  map.on('click', onMapClick);
 });

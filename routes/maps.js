@@ -38,11 +38,39 @@ module.exports = (db) => {
     res.render('map_view', {id});
   });
 
+  router.post("/create", (req, res) => {
+    const id = req.session.userId;
+    const title = req.body.title;
+    const description = req.body.description;
+    const image = req.body.image;
+    const lng = 49.28249;
+    const lat = -123.127576;
+    db.query('INSERT INTO maps (user_id, map_lng, map_lat, map_title, map_pic_url,map_description) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *',
+      [id, lng, lat, title, description, image])
+      .then(data => {
+        const id = data.rows[0].id;
+        console.log('data.rows', id)
+        // res.redirect('map_view', {id});
+        res.render('map_view', {id});
+      })
 
+    /* db.query(`SELECT * FROM maps WHERE map_title = '${title}'`)
+      .then(data => {
+        const id = data.rows[0].id;
+        console.log(id);
+        // res.redirect('map_view', {id});
+        res.render('map_view', {id});
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      }); */
+  })
 
   //EDITS SELECTED VALUES IN ROW ON POINT TABLE
   router.post("/:id/edit", (req, res) => {
-    console.log(req.body.id);
+    // console.log(req.body.id);
     const mapID = req.params.id;
     const queryParams = [];
     let queryString = `UPDATE point`;

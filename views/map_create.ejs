@@ -37,11 +37,11 @@
       </div>
 
     </div>
-    <form class="map_and_point_form">
-      <div><textarea placeholder="Enter the Map's name:"></textarea></div>
-      <div><textarea placeholder="Enter the Map's description:"></textarea></div>
-      <div><textarea placeholder="Enter a url for a Map image:"></textarea></div>
-      <button type="submit">Submit</button>
+    <form class="map_and_point_form" action="/maps/create" method="POST">
+      <input name="title" placeholder="Enter the Map's name:"></input>
+      <input name="description" placeholder="Enter the Map's description:"></input>
+      <input name="image" placeholder="Enter a url for a Map image:"></input>
+      <button class="create_map_button" type="submit">Submit</button>
     </form>
   </div>
 
