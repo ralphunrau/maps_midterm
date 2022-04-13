@@ -16,7 +16,7 @@ module.exports = (db) => {
     res.render('map_create');
   });
 
- // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
+  // RETURNS TABLE WITH SINGLE ROW OF ID IN URL
   router.get("/:id", (req, res) => {
     const id = req.params.id;
     res.render('map_view', {id});

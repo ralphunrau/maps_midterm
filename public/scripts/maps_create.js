@@ -23,4 +23,5 @@ $(document).ready(function() {
   $('.leaflet-popup-content').append(popupForm)
   }
   map.on('click', onMapClick);
+
 });
