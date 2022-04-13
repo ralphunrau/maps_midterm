@@ -40,22 +40,6 @@ $(document).ready(function () {
         `);
         $('.leaflet-popup-content').append(popupForm);
       };
-<<<<<<< HEAD
-      map.on('click', onMapClick);
-      // const submitform = $('.pointCreationForm');
-      // submitform.submit(function() {
-      //   // event.preventDefault();
-      //   // L.marker([e.latlng.lat, e.latlng.lng]).addTo(map)
-      //   //   .bindPopup('A point of interest.')
-      //   //   .closePopup();
-      //   console.log('23');
-      // });
-
-      // addToFav.on('click', ()=> {
-      //   console.log('23');
-      // })
-
-=======
       const submitform = $('.pointCreationForm');
       map.on('click', onMapClick);
       submitform.submit(function() {
@@ -65,7 +49,6 @@ $(document).ready(function () {
         //   .closePopup();
         console.log('23');
       });
->>>>>>> 00e75cf29540b0b90248cfad806e0660eb254f70
     });
 
     $.get('/api/maps')
