@@ -65,7 +65,13 @@ module.exports = (db) => {
     db.query(`UPDATE points SET point_active = false WHERE point_title = $1`, [titleId]);
     res.render("map_view", {id});
   });
-
+  //CHANGE POINT TO NOT ACTIVE - TO DELETE FROM MAP
+  router.get("/:id/:map_title/delete", (req, res) => {
+    const id = req.params.id;
+    const mapTitle = req.params.map_title;
+    db.query(`UPDATE points SET point_active = false WHERE point_title = $1`, [mapTitle]);
+    res.render('map_view', {id});
+  });
   //EDITS SELECTED VALUES IN ROW ON POINT TABLE
   router.post("/:id/edit", (req, res) => {
     // console.log(req.body.id);
