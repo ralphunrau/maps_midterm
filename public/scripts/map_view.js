@@ -25,7 +25,7 @@ $(document).ready(function () {
           </form>
           <form class="delete_form" action='/maps/${id}/${point.point_title}/delete' method="GET">
           <button>DELETE</button>
-          </form>`, )
+          </form>`)
           .openPopup();
       }
       const popup = L.popup();
@@ -48,10 +48,10 @@ $(document).ready(function () {
         $('.leaflet-popup-content').append(popupForm);
       };
 
-      const editForm = $('.edit_form');
-      editForm.submit((e) => {
+      $('.edit_form').on('submit', (e) => {
         e.preventDefault();
-        /* action="/maps/${id}/:${}/edit" method="POST" */
+        console.log('event:', e);
+        // action="/maps/${id}/:${point.point_title}/edit" method="POST"
         const editPopupForm = `
         <form class ='editPointForm'>
           <div><textarea name='title' placeholder ='Enter a new title:' style='height: 20px;'></textarea></div>
@@ -59,8 +59,7 @@ $(document).ready(function () {
           <div><textarea name='image' placeholder ='Enter a new image url:' style='height: 20px;'></textarea></div>
           <button class='submit'>Sumbit</button>
         </form>`;
-        // L.marker([e.latlng.lat, e.latlng.lng])
-        //   .closePopup()
+
         $('.edit_form').remove();
         $('.delete_form').remove();
         $('.leaflet-popup-content').append(editPopupForm);
