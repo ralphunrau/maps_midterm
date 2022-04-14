@@ -74,12 +74,12 @@ $(document).ready(function () {
           </div>
         </div>
 
-        <div class='editForm${point.id}'>
+        <div class='editForm' id='editForm${point.id}'>
           <div class='title_x'>
             <h4>Edit Form</h4>
             </div>
           <form class='inputsContainer' method="POST" action="/maps/${point.map_id}/${point.id}/edit">
-            <button class='closeButton${point.id}' type="reset"> CLOSE AND RESET </button>
+            <button class='closeButton' id='closeButton${point.id}' type="reset"> CLOSE AND RESET </button>
             <textarea class='text' name=title placeholder ='Title: ${point.point_title}' style='height: 40px;'></textarea>
             <textarea class='text' name=descr placeholder ='Description: ${point.point_description}' style='height: 40px;'></textarea>
             <textarea class='text' name=url placeholder ='URL: ${point.point_url}' style='height: 40px;'></textarea>
@@ -89,14 +89,14 @@ $(document).ready(function () {
         `;
         div.append(divContent);
 
-        $(`.editForm${point.id}`).hide();
+        $(`#editForm${point.id}`).hide();
 
         $(`.editButton${point.id}`).on('click', () => {
-          $(`.editForm${point.id}`).slideDown();
+          $(`#editForm${point.id}`).slideDown();
         });
 
-        $(`.closeButton${point.id}`).on('click', () => {
-          $(`.editForm${point.id}`).slideUp();
+        $(`#closeButton${point.id}`).on('click', () => {
+          $(`#editForm${point.id}`).slideUp();
         });
       }
     });

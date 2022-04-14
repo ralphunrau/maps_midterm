@@ -10,13 +10,18 @@
   <script type="text/javascript" src="/scripts/index.js"></script>
 
   <script> const id = <%= userId %> </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Square+Peg&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <%- include('partials/_header') %>
   <div class="title">
-    <h1>Welcome to Maps !</h1>
-    <a href="/maps/create"> Create Map </a>
+    <p id="welcomeTitle">Welcome to Maps !<p>
+    <form method="GET" action="/maps/create">
+      <button> Create a Map </button>
+    </form>
   </div>
   <div class="container"></div>
 </body>

@@ -6,13 +6,15 @@ $(document).ready(function () {
           const article = $("<article></article>").addClass('content');
           $(".container").append(article);
           const itemContent = `
-          <img src=${map.map_pic_url}>
           <div>
+            <img src=${map.map_pic_url}>
             <a href="/maps/${map.id}"><h3>${map.map_title}</h3></a>
-            <p>
+          </div>
+          <div class='descr'>
+            <a href="/maps/${map.id}">
                ${map.map_description}
 
-            </p>
+            </a>
           </div>`;
           const newItem = article.append(itemContent);
           return newItem;
