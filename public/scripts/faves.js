@@ -2,7 +2,6 @@ $(document).ready(function() {
   $.get(`/api/faves`)
     .then(data => {
       for (const map of data) {
-        console.log(map);
         const mapsItem = function (map) {
           const article = $("<article></article>").addClass('content');
           $(".container").append(article);
@@ -16,7 +15,6 @@ $(document).ready(function() {
             </p>
           </div>`;
           const newItem = article.append(itemContent);
-          console.log(">>>>>",newItem);
           return newItem;
         };
         mapsItem(map);

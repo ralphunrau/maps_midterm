@@ -74,7 +74,8 @@ app.use("/logout", logoutRoute(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  const userId = req.session.user_id;
+  res.render("index", {userId});
 });
 
 app.listen(PORT, () => {
