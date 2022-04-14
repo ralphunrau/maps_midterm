@@ -83,59 +83,7 @@ body {
       width: 40%
     }
 
-    .buttons {
-      button {
-        appearance: button;
-        background-color: #000;
-        background-image: none;
-        border: 1px solid #000;
-        border-radius: 4px;
-        box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
-        width: 50%;
-        height: 50%;
-        color: #fff;
-        cursor: pointer;
-        display: inline-block;
-        font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 10px;
-        margin: 0 5px 10px 0;
-        overflow: visible;
-        padding: 12px 40px;
-        text-align: center;
-        text-transform: none;
-        touch-action: manipulation;
-        user-select: none;
-        -webkit-user-select: none;
-        vertical-align: middle;
-        white-space: nowrap;
-      }
-
-      button :focus {
-        text-decoration: none;
-      }
-
-      button :hover {
-        text-decoration: none;
-      }
-
-      button :active {
-        box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
-        outline: 0;
-      }
-
-      button :not([disabled]):active {
-        box-shadow: rgb(177, 144, 37) 2px 2px 0 0, #000 2px 2px 0 1px;
-        transform: translate(2px, 2px);
-      }
-
-      @media (min-width: 768px) {
-        button  {
-          padding: 12px 50px;
-        }
-      }
-    }
+    //
     .container {
       display: flex;
       flex-direction: column;
@@ -168,7 +116,11 @@ body {
     }
 
     .closeButton {
-      margin-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    .text {
+      background-color: #dddddd;
     }
   }
 }
@@ -177,4 +129,10 @@ body {
 
 div.leaflet-popup-content-wrapper {
   width: 200px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
