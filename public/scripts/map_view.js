@@ -4,9 +4,6 @@ $(document).ready(function () {
   $.get(`/api/maps/${id}`)
     .then(data => {
 
-      // console.log('data', data[0]);
-      // const maplat = "-123.127576";
-      // const maplng = "49.28249";
       $('#mapTitle').html(data[0].map_title);
       const map = L.map('map').setView([data[0].map_lat, data[0].map_lng], 10);
       L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`).addTo(map);
@@ -43,7 +40,6 @@ $(document).ready(function () {
 
       $('.edit_form').on('submit', (e) => {
         e.preventDefault();
-        console.log('event:', e);
         // action="/maps/${id}/:${point.point_title}/edit" method="POST"
         const editPopupForm = `
         <form class ='editPointForm'>

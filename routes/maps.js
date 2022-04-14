@@ -38,14 +38,13 @@ module.exports = (db) => {
     db.query('SELECT user_id FROM maps WHERE maps.id = $1', [req.params.id])
       .then((data) => {
         if ((data.rows[0].user_id) != userId) {
-          console.log(">>>>>>>id no match<<<<<<<", data.rows[0].user_id, userId);
-          res.render('map_view', { id, userId });
+          const errorMsg = 'You must be an authenticated user to add a point to a map!';
+          res.render('error', { id, userId, errorMsg});
           return;
         } else {
           db.query('INSERT INTO points (map_id,point_lng, point_lat, point_title, point_description, point_url) VALUES ($1,$2,$3,$4,$5,$6)',
             [id, lng, lat, title, description, image]);
           res.render('map_view', { id, userId });
-          console.log("second promise");
         }
       });
   });
@@ -76,11 +75,10 @@ module.exports = (db) => {
 
     db.query('SELECT user_id FROM maps WHERE maps.id = $1', [id])
       .then((data) => {
-        console.log("check ids", userId, data.rows[0].user_id);
         if (userId != data.rows[0].user_id) {
-          res.render('map_view', { id, userId });
+          const errorMsg = 'You must be an authenticated user to delete a map!';
+          res.render('error', { id, userId, errorMsg});
         } else {
-          console.log("in else");
           db.query(`UPDATE points SET point_active = false WHERE point_title = $1`, [mapTitle]);
           res.render('map_view', { id, userId });
         }
@@ -94,9 +92,9 @@ module.exports = (db) => {
     const pointId = req.params.point;
     db.query('SELECT user_id FROM maps WHERE maps.id = $1', [id])
       .then((data) => {
-        console.log("check ids", userId, data.rows[0].user_id);
         if (userId != data.rows[0].user_id) {
-          res.render('map_view', { id, userId });
+          const errorMsg = 'You must be an authenticated user to edit a map!';
+          res.render('error', { id, userId, errorMsg});
         } else {
           const queryParams = [];
           let queryString = `UPDATE points SET `;
@@ -116,8 +114,6 @@ module.exports = (db) => {
             queryString += `point_url = $${queryParams.length} `;
           }
           queryString += (`WHERE id = ${pointId} RETURNING *;`);
-          console.log("query string", queryString);
-          console.log("query string", queryParams);
           db.query(queryString, queryParams)
             .then(data => {
               const userId = req.session.userId;
@@ -125,7 +121,6 @@ module.exports = (db) => {
               res.render("map_view", { id, userId });
             })
             .catch(err => {
-              console.log("error in catch");
               res
                 .status(500)
                 .json({ error: err.message });
@@ -137,7 +132,6 @@ module.exports = (db) => {
 
 
   router.post("/add/:lat/:lng", (req, res) => {
-    console.log(req.params.lat, req.params.lng, req.body);
     res.render();
   });
 

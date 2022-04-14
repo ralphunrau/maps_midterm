@@ -4,7 +4,6 @@ $(document).ready(function () {
 
   const popup = L.popup();
   function onMapClick(e){
-    // console.log (e.latlng);
     popup
     .setLatLng(e.latlng)
     .setContent(`You clicked the map at ${e.latlng.lat}, ${e.latlng.lng}. Give this point some information:`)

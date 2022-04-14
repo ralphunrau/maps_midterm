@@ -2,7 +2,6 @@ $(document).ready(function () {
   $.get(`/api/profile/`)
     .then(data => {
       for (const map of data) {
-        console.log(map);
         const mapsItem = function (map) {
           const article = $("<article></article>").addClass('content');
           $(".container").append(article);
