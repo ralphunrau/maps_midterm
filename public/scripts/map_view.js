@@ -4,8 +4,11 @@ $(document).ready(function () {
   $.get(`/api/maps/${id}`)
     .then(data => {
 
+      const lat = data[0].map_lat;
+      const lng = data[0].map_lng;
+
       $('#mapTitle').html(data[0].map_title);
-      const map = L.map('map').setView([data[0].map_lat, data[0].map_lng], 10);
+      const map = L.map('map').setView([lat, lng], 17);
       L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`).addTo(map);
 
       for (const point of data) {
@@ -65,7 +68,7 @@ $(document).ready(function () {
         $(".points_right").append(div);
         const divContent = `
         <div class='pointContainer'>
-          <h5>${point.point_title} </h5>
+          <h3>${point.point_title} </h3>
           <div class='buttons'>
             <button class='editButton${point.id}'> Edit </button>
             <form action='/maps/${id}/${point.point_title}/delete' method="GET">
