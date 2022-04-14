@@ -8,18 +8,18 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  justify-content: space-evenly;
 }
 
 .content {
   display: flex;
   flex-direction: row;
-  width: 28%;
+  width: auto;
   margin-left: 2.5%;
   margin-right: 2.5%;
   margin-top: 2.5%;
   position: relative;
   padding: 0;
-  justify-content: center;
 
   img {
     width: 410px;
@@ -41,7 +41,6 @@
     transition: all 400ms ease-out;
     text-align: center;
     overflow: scroll;
-    margin-left: 62.5px;
 
     a {
       font-size: 20px;
