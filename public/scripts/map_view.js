@@ -64,27 +64,40 @@ $(document).ready(function () {
         console.log(point)
         const div = $("<div class='container'></div");
         $(".points_right").append(div);
-        const divContent = `<div class='pointContainer'><h3>${point.point_title} </h3> <div class='buttons'><button> Edit </button><form action='/maps/${id}/${point.point_title}/delete' method="GET">
-        <button>DELETE</button></form></div></div>
-        <div class='editForm'>
-        <h4>Edit Form</h4>
-        <form class='inputsContainer'>
-        <textarea class='text' name=title placeholder ='Title: ${point.point_title}' style='height: 40px;'></textarea>
-        <textarea class='text' name=descr placeholder ='Description: ${point.point_description}' style='height: 40px;'></textarea>
-        <textarea class='text' name=url placeholder ='URL: ${point.point_url}' style='height: 40px;'></textarea>
-        <button class='submitEdit${id}'>Submit </button>
-        </form>
+        const divContent = `
+        <div class='pointContainer'>
+          <h3>${point.point_title} </h3>
+          <div class='buttons'>
+            <button class='editButton${point.id}'> Edit </button>
+            <form action='/maps/${id}/${point.point_title}/delete' method="GET">
+              <button>DELETE</button>
+            </form>
+          </div>
+        </div>
+
+        <div class='editForm${point.id}'>
+          <div class='title_x'>
+            <h4>Edit Form</h4>
+            <button class='closeButton${point.id}'> X </button>
+          </div>
+          <form class='inputsContainer' method="POST" action="${point.map_id}/edit">
+            <textarea class='text' name=title placeholder ='Title: ${point.point_title}' style='height: 40px;'></textarea>
+            <textarea class='text' name=descr placeholder ='Description: ${point.point_description}' style='height: 40px;'></textarea>
+            <textarea class='text' name=url placeholder ='URL: ${point.point_url}' style='height: 40px;'></textarea>
+            <button>Submit </button>
+          </form>
         </div>
         `;
         div.append(divContent);
 
-        //hides existin forms
-        $(".editForm").hide();
+        $(`.editForm${point.id}`).hide();
 
+        $(`.editButton${point.id}`).on('click', () => {
+          $(`.editForm${point.id}`).slideDown();
+        })
 
-        //idk how this is going to work but im thinking it will slide down the hidden forms depending on which submit you click?
-        $(`.submitEdit${id}`).on('submit', () => {
-          console.log("hi")
+        $(`.closeButton${point.id}`).on('click', () => {
+          $(`.editForm${point.id}`).slideUp();
         })
       }
     })
