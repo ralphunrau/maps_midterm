@@ -19,20 +19,14 @@ $(document).ready(function () {
         let lng = point.point_lng;
         L.marker([lng, lat]).addTo(map)
           .bindPopup(`${point.point_title}<br>${point.point_description}
-          <br><img src="${point.point_url} width="100" height="100"">
-          <form action="/${id}/${point.point_title}/edit" method="POST">
-          <button>EDIT</button></form>
-          <form action='/maps/${id}/${point.point_title}/delete' method="GET">
-          <button>DELETE</button></form>`)
+          <br><img src="${point.point_url} width="100" height="100"">`)
           .openPopup();
-
-          console.log(id,point.point_title);
       }
       const popup = L.popup();
 
       const onMapClick = (e) => {
-        L.marker([e.latlng.lat, e.latlng.lng])
-          // .openPopup();
+        L.marker([e.latlng.lat, e.latlng.lng]);
+        // .openPopup();
         popup
           .setLatLng(e.latlng)
           .setContent(`You clicked the map at ${e.latlng.lat}, ${e.latlng.lng}. Give this point some information:`)
@@ -48,20 +42,12 @@ $(document).ready(function () {
         $('.leaflet-popup-content').append(popupForm);
       };
       map.on('click', onMapClick);
-      // const submitform = $('.pointCreationForm');
-      // submitform.submit(function() {
-      //   // event.preventDefault();
-      //   // L.marker([e.latlng.lat, e.latlng.lng]).addTo(map)
-      //   //   .bindPopup('A point of interest.')
-      //   //   .closePopup();
-      //   console.log('23');
-      // });
     });
 
-    $.get(`/api/points/${id}`)
+  $.get(`/api/points/${id}`)
     .then(points => {
       for (const point of points) {
-        console.log(point)
+        console.log(point);
         const div = $("<div class='container'></div");
         $(".points_right").append(div);
         const divContent = `
@@ -78,9 +64,9 @@ $(document).ready(function () {
         <div class='editForm${point.id}'>
           <div class='title_x'>
             <h4>Edit Form</h4>
-            <button class='closeButton${point.id}'> X </button>
-          </div>
+            </div>
           <form class='inputsContainer' method="POST" action="${point.map_id}/edit">
+            <button class='closeButton${point.id}' type="reset"> CLOSE AND RESET </button>
             <textarea class='text' name=title placeholder ='Title: ${point.point_title}' style='height: 40px;'></textarea>
             <textarea class='text' name=descr placeholder ='Description: ${point.point_description}' style='height: 40px;'></textarea>
             <textarea class='text' name=url placeholder ='URL: ${point.point_url}' style='height: 40px;'></textarea>
@@ -94,12 +80,12 @@ $(document).ready(function () {
 
         $(`.editButton${point.id}`).on('click', () => {
           $(`.editForm${point.id}`).slideDown();
-        })
+        });
 
         $(`.closeButton${point.id}`).on('click', () => {
           $(`.editForm${point.id}`).slideUp();
-        })
+        });
       }
-    })
+    });
 
 });
