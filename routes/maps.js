@@ -81,8 +81,9 @@ module.exports = (db) => {
     res.render('map_view', {id, userId});
   });
   //EDITS SELECTED VALUES IN ROW ON POINT TABLE
-  router.post("/:id/edit", (req, res) => {
+  router.post("/:id/:point/edit", (req, res) => {
     const id = req.params.id;
+    const pointId = req.params.point;
     const queryParams = [];
     let queryString = `UPDATE points SET `;
 
@@ -100,9 +101,7 @@ module.exports = (db) => {
       queryParams.push(req.body.url);
       queryString += `point_url = $${queryParams.length} `;
     }
-
-
-    queryString += (`WHERE id = 15 RETURNING *;`);
+    queryString += (`WHERE id = ${pointId} RETURNING *;`);
     console.log("query string", queryString);
     console.log("query string", queryParams);
     db.query(queryString, queryParams)

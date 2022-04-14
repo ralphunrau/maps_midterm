@@ -23,7 +23,6 @@ $(document).ready(function () {
           .openPopup();
       }
       const popup = L.popup();
-
       const onMapClick = (e) => {
         L.marker([e.latlng.lat, e.latlng.lng]);
         // .openPopup();
@@ -41,6 +40,24 @@ $(document).ready(function () {
         `);
         $('.leaflet-popup-content').append(popupForm);
       };
+
+      $('.edit_form').on('submit', (e) => {
+        e.preventDefault();
+        console.log('event:', e);
+        // action="/maps/${id}/:${point.point_title}/edit" method="POST"
+        const editPopupForm = `
+        <form class ='editPointForm'>
+          <div><textarea name='title' placeholder ='Enter a new title:' style='height: 20px;'></textarea></div>
+          <div><textarea name='description' placeholder ='Enter a new description:' style='height: 40px;'></textarea></div>
+          <div><textarea name='image' placeholder ='Enter a new image url:' style='height: 20px;'></textarea></div>
+          <button class='submit'>Sumbit</button>
+        </form>`;
+
+        $('.edit_form').remove();
+        $('.delete_form').remove();
+        $('.leaflet-popup-content').append(editPopupForm);
+      });
+
       map.on('click', onMapClick);
     });
 
@@ -65,12 +82,12 @@ $(document).ready(function () {
           <div class='title_x'>
             <h4>Edit Form</h4>
             </div>
-          <form class='inputsContainer' method="POST" action="${point.map_id}/edit">
+          <form class='inputsContainer' method="POST" action="/maps/${point.map_id}/${point.id}/edit">
             <button class='closeButton${point.id}' type="reset"> CLOSE AND RESET </button>
             <textarea class='text' name=title placeholder ='Title: ${point.point_title}' style='height: 40px;'></textarea>
             <textarea class='text' name=descr placeholder ='Description: ${point.point_description}' style='height: 40px;'></textarea>
             <textarea class='text' name=url placeholder ='URL: ${point.point_url}' style='height: 40px;'></textarea>
-            <button>Submit </button>
+            <button type="submit"> Submit </button>
           </form>
         </div>
         `;
