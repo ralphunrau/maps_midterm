@@ -18,8 +18,14 @@
   <%- include('partials/_header') %>
   <div class="title">
     <h1>My Absolute FAVORITES</h1>
-    <a href="/maps/create"> Create Map </a>
-    <a href="/profiles"> Created by Me </a>
+    <div class="redirects">
+      <form method="GET" action="/maps/create">
+        <button> Create a Map </button>
+      </form>
+      <form method="GET" action="/profiles">
+        <button> Created by Me </button>
+      </form>
+    </div>
   </div>
   <div class="container"></div>
 </body>

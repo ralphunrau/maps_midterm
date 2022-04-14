@@ -19,32 +19,29 @@
   margin-top: 2.5%;
   position: relative;
   padding: 0;
+  justify-content: center;
 
   img {
     width: 410px;
     height: 410px
   }
 
-  img:hover {
-    opacity: 0.4;
-  }
-
   .descr {
     display: flex;
     flex-direction: column;
-    position: absolute;
     opacity: 0;
     font-size: 40px;
     position: absolute;
     top: 0;
     left: 0;
-    color: rgb(236, 229, 229);
-    background-color: rgba(200, 200, 200, 0.5);
+    color: rgb(253, 253, 253);
+    background-color: rgba(255, 255, 255, 0.5);
     width: 410px;
     height: 410px;
     transition: all 400ms ease-out;
     text-align: center;
     overflow: scroll;
+    margin-left: 62.5px;
 
     a {
       font-size: 20px;
@@ -82,4 +79,55 @@ a {
 .descr {
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   scrollbar-width: none;  /* Firefox */
+}
+
+button {
+  appearance: button;
+  background-color: #000;
+  background-image: none;
+  border: 1px solid #000;
+  border-radius: 4px;
+  box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0 5px 10px 0;
+  overflow: visible;
+  padding: 12px 40px;
+  text-align: center;
+  text-transform: none;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+button :focus {
+  text-decoration: none;
+}
+
+button :hover {
+  text-decoration: none;
+}
+
+button :active {
+  box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
+  outline: 0;
+}
+
+button :not([disabled]):active {
+  box-shadow: rgb(177, 144, 37) 2px 2px 0 0, #000 2px 2px 0 1px;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  button  {
+    padding: 12px 50px;
+  }
 }
