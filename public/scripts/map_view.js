@@ -23,7 +23,6 @@ $(document).ready(function () {
           .openPopup();
       }
       const popup = L.popup();
-
       const onMapClick = (e) => {
         L.marker([e.latlng.lat, e.latlng.lng]);
         // .openPopup();
@@ -41,6 +40,24 @@ $(document).ready(function () {
         `);
         $('.leaflet-popup-content').append(popupForm);
       };
+
+      $('.edit_form').on('submit', (e) => {
+        e.preventDefault();
+        console.log('event:', e);
+        // action="/maps/${id}/:${point.point_title}/edit" method="POST"
+        const editPopupForm = `
+        <form class ='editPointForm'>
+          <div><textarea name='title' placeholder ='Enter a new title:' style='height: 20px;'></textarea></div>
+          <div><textarea name='description' placeholder ='Enter a new description:' style='height: 40px;'></textarea></div>
+          <div><textarea name='image' placeholder ='Enter a new image url:' style='height: 20px;'></textarea></div>
+          <button class='submit'>Sumbit</button>
+        </form>`;
+
+        $('.edit_form').remove();
+        $('.delete_form').remove();
+        $('.leaflet-popup-content').append(editPopupForm);
+      });
+
       map.on('click', onMapClick);
     });
 
