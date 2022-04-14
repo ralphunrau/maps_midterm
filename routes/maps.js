@@ -76,7 +76,7 @@ module.exports = (db) => {
 
     db.query('SELECT user_id FROM maps WHERE maps.id = $1', [id])
       .then((data) => {
-        console.log("check ids", typeof userId, typeof data.rows[0].user_id);
+        console.log("check ids", userId, data.rows[0].user_id);
         if (userId != data.rows[0].user_id) {
           res.render('map_view', { id, userId });
         } else {
@@ -90,40 +90,51 @@ module.exports = (db) => {
   //EDITS SELECTED VALUES IN ROW ON POINT TABLE
   router.post("/:id/:point/edit", (req, res) => {
     const id = req.params.id;
+    const userId = req.session.userId;
     const pointId = req.params.point;
-    const queryParams = [];
-    let queryString = `UPDATE points SET `;
+    db.query('SELECT user_id FROM maps WHERE maps.id = $1', [id])
+      .then((data) => {
+        console.log("check ids", userId, data.rows[0].user_id);
+        if (userId != data.rows[0].user_id) {
+          res.render('map_view', { id, userId });
+        } else {
+          const queryParams = [];
+          let queryString = `UPDATE points SET `;
 
-    if (req.body.title) {
-      queryParams.push(req.body.title);
-      queryString += `point_title = $${queryParams.length}, `;
-    }
+          if (req.body.title) {
+            queryParams.push(req.body.title);
+            queryString += `point_title = $${queryParams.length}, `;
+          }
 
-    if (req.body.descr) {
-      queryParams.push(req.body.descr);
-      queryString += `point_description = $${queryParams.length}, `;
-    }
+          if (req.body.descr) {
+            queryParams.push(req.body.descr);
+            queryString += `point_description = $${queryParams.length}, `;
+          }
 
-    if (req.body.url) {
-      queryParams.push(req.body.url);
-      queryString += `point_url = $${queryParams.length} `;
-    }
-    queryString += (`WHERE id = ${pointId} RETURNING *;`);
-    console.log("query string", queryString);
-    console.log("query string", queryParams);
-    db.query(queryString, queryParams)
-      .then(data => {
-        const userId = req.session.userId;
-        const maps = data.rows;
-        res.render("map_view", { id, userId });
-      })
-      .catch(err => {
-        console.log("error in catch");
-        res
-          .status(500)
-          .json({ error: err.message });
+          if (req.body.url) {
+            queryParams.push(req.body.url);
+            queryString += `point_url = $${queryParams.length} `;
+          }
+          queryString += (`WHERE id = ${pointId} RETURNING *;`);
+          console.log("query string", queryString);
+          console.log("query string", queryParams);
+          db.query(queryString, queryParams)
+            .then(data => {
+              const userId = req.session.userId;
+              const maps = data.rows;
+              res.render("map_view", { id, userId });
+            })
+            .catch(err => {
+              console.log("error in catch");
+              res
+                .status(500)
+                .json({ error: err.message });
+            });
+
+        }
       });
   });
+
 
   router.post("/add/:lat/:lng", (req, res) => {
     console.log(req.params.lat, req.params.lng, req.body);
