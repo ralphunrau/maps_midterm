@@ -65,8 +65,7 @@ module.exports = (db) => {
     res.render('map_view', {id});
   });
   //EDITS SELECTED VALUES IN ROW ON POINT TABLE
-  router.post("/:id/edit", (req, res) => {
-    // console.log(req.body.id);
+  router.post("/:id/:point_title/edit", (req, res) => {
     const mapID = req.params.id;
     const queryParams = [];
     let queryString = `UPDATE point`;

@@ -16,7 +16,7 @@ $(document).ready(function() {
             </p>
           </div>`;
           const newItem = article.append(itemContent);
-          console.log(">>>>>",newItem); //**** */
+          console.log(">>>>>",newItem);
           return newItem;
         };
         mapsItem(map);

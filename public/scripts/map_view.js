@@ -4,7 +4,7 @@ $(document).ready(function () {
   $.get(`/api/maps/${id}`)
     .then(data => {
 
-      console.log('data', data[0]);
+      // console.log('data', data[0]);
       const maplat = "-123.127576";
       const maplng = "49.28249";
       $('#mapTitle').html(data[0].map_title);
@@ -19,15 +19,16 @@ $(document).ready(function () {
         let lng = point.point_lng;
         L.marker([lng, lat]).addTo(map)
           .bindPopup(`${point.point_title}<br>${point.point_description}
-          <br><img src="${point.point_url} width="100" height="100"">
-          <form action="/${id}/${point.point_title}/edit" method="POST">
-          <button>EDIT</button></form>
-          <form action='/maps/${id}/${point.point_title}/delete' method="GET">
-          <button>DELETE</button></form>`)
+          <br><img src="/maps/${point.point_url} width="100" height="100"">
+          <form class="edit_form">
+          <button type="submit">EDIT</button>
+          </form>
+          <form class="delete_form" action='/maps/${id}/${point.point_title}/delete' method="GET">
+          <button>DELETE</button>
+          </form>`, )
           .openPopup();
       }
       const popup = L.popup();
-
       const onMapClick = (e) => {
         L.marker([e.latlng.lat, e.latlng.lng])
           .bindPopup('A point of interest.')
@@ -46,15 +47,26 @@ $(document).ready(function () {
         `);
         $('.leaflet-popup-content').append(popupForm);
       };
+
+      const editForm = $('.edit_form');
+      editForm.submit((e) => {
+        e.preventDefault();
+        /* action="/maps/${id}/:${}/edit" method="POST" */
+        const editPopupForm = `
+        <form class ='editPointForm'>
+          <div><textarea name='title' placeholder ='Enter a new title:' style='height: 20px;'></textarea></div>
+          <div><textarea name='description' placeholder ='Enter a new description:' style='height: 40px;'></textarea></div>
+          <div><textarea name='image' placeholder ='Enter a new image url:' style='height: 20px;'></textarea></div>
+          <button class='submit'>Sumbit</button>
+        </form>`;
+        // L.marker([e.latlng.lat, e.latlng.lng])
+        //   .closePopup()
+        $('.edit_form').remove();
+        $('.delete_form').remove();
+        $('.leaflet-popup-content').append(editPopupForm);
+      });
+
       map.on('click', onMapClick);
-      // const submitform = $('.pointCreationForm');
-      // submitform.submit(function() {
-      //   // event.preventDefault();
-      //   // L.marker([e.latlng.lat, e.latlng.lng]).addTo(map)
-      //   //   .bindPopup('A point of interest.')
-      //   //   .closePopup();
-      //   console.log('23');
-      // });
     });
 
     $.get('/api/maps')
