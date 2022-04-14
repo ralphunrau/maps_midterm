@@ -67,15 +67,7 @@ module.exports = (db) => {
         res.render('map_view', { id, userId });
       });
   });
-  // DELETE SELECTED POINT FROM MAP
 
-  router.post("/:id/:point_title/delete", (req, res) => {
-    const userId = req.session.userId;
-    const id = req.params.id;
-    const titleId = req.params.point_title;
-    db.query(`UPDATE points SET point_active = false WHERE point_title = $1`, [titleId]);
-    res.render("map_view", { id, userId });
-  });
   //CHANGE POINT TO NOT ACTIVE - TO DELETE FROM MAP
   router.get("/:id/:map_title/delete", (req, res) => {
     const userId = req.session.userId;
@@ -84,6 +76,7 @@ module.exports = (db) => {
     db.query(`UPDATE points SET point_active = false WHERE point_title = $1`, [mapTitle]);
     res.render('map_view', { id, userId });
   });
+
   //EDITS SELECTED VALUES IN ROW ON POINT TABLE
   router.post("/:id/:point/edit", (req, res) => {
     const id = req.params.id;
