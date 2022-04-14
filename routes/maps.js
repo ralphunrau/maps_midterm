@@ -74,45 +74,36 @@ module.exports = (db) => {
   });
   //EDITS SELECTED VALUES IN ROW ON POINT TABLE
   router.post("/:id/edit", (req, res) => {
-    // console.log(req.body.id);
-    const mapID = req.params.id;
+    const id = req.params.id;
     const queryParams = [];
-    let queryString = `UPDATE point`;
-
-    if (req.body.lat) {
-      queryParams.push(req.body.lat);
-      queryString += `SET lat = $${queryParams.length},`;
-    }
-
-    if (req.body.lng) {
-      queryParams.push(req.body.lng);
-      queryString += `SET lng = $${queryParams.length},`;
-    }
+    let queryString = `UPDATE points SET `;
 
     if (req.body.title) {
       queryParams.push(req.body.title);
-      queryString += `SET title = $${queryParams.length},`;
+      queryString += `point_title = $${queryParams.length}, `;
     }
 
-    if (req.body.description) {
-      queryParams.push(req.body.description);
-      queryString += `SET description = $${queryParams.length},`;
+    if (req.body.descr) {
+      queryParams.push(req.body.descr);
+      queryString += `point_description = $${queryParams.length}, `;
     }
 
-    if (req.body.point_url) {
-      queryParams.push(req.body.point_url);
-      queryString += `SET point_url = $${queryParams.length},`;
+    if (req.body.url) {
+      queryParams.push(req.body.url);
+      queryString += `point_url = $${queryParams.length} `;
     }
 
-    queryParams.push(mapID);
-    queryString += (`WHERE id = $${queryParams.length} RETURNING *;`);
 
+    queryString += (`WHERE id = 15 RETURNING *;`);
+    console.log("query string", queryString);
+    console.log("query string", queryParams);
     db.query(queryString, queryParams)
       .then(data => {
         const maps = data.rows;
-        res.json({ maps });
+        res.render("map_view", {id});
       })
       .catch(err => {
+        console.log("error in catch");
         res
           .status(500)
           .json({ error: err.message });

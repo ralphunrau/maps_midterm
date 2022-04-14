@@ -29,7 +29,6 @@ module.exports = (db) => {
     AND points.point_active = true
     ORDER BY map_created_on;`, [mapID])
       .then(data => {
-        console.log("from map_api line 32", data);
         const map = data.rows;
         res.json(map);
       })
