@@ -65,11 +65,11 @@ $(document).ready(function () {
         $(".points_right").append(div);
         const divContent = `
         <div class='pointContainer'>
-          <h3>${point.point_title} </h3>
+          <h5>${point.point_title} </h5>
           <div class='buttons'>
             <button class='editButton${point.id}'> Edit </button>
             <form action='/maps/${id}/${point.point_title}/delete' method="GET">
-              <button>DELETE</button>
+              <button>Delete</button>
             </form>
           </div>
         </div>
