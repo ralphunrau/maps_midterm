@@ -37,7 +37,7 @@ module.exports = (db) => {
 
     db.query('SELECT user_id FROM maps WHERE maps.id = $1', [req.params.id])
       .then((data) => {
-        if ((data.rows[0].user_id) !== userId) {
+        if ((data.rows[0].user_id) != userId) {
           console.log(">>>>>>>id no match<<<<<<<", data.rows[0].user_id, userId);
           res.render('map_view', { id, userId });
           return;
@@ -73,8 +73,18 @@ module.exports = (db) => {
     const userId = req.session.userId;
     const id = req.params.id;
     const mapTitle = req.params.map_title;
-    db.query(`UPDATE points SET point_active = false WHERE point_title = $1`, [mapTitle]);
-    res.render('map_view', { id, userId });
+
+    db.query('SELECT user_id FROM maps WHERE maps.id = $1', [id])
+      .then((data) => {
+        console.log("check ids", typeof userId, typeof data.rows[0].user_id);
+        if (userId != data.rows[0].user_id) {
+          res.render('map_view', { id, userId });
+        } else {
+          console.log("in else");
+          db.query(`UPDATE points SET point_active = false WHERE point_title = $1`, [mapTitle]);
+          res.render('map_view', { id, userId });
+        }
+      });
   });
 
   //EDITS SELECTED VALUES IN ROW ON POINT TABLE
