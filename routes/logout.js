@@ -8,5 +8,5 @@ module.exports = (db) => {
     req.session = null;
     res.redirect("/maps");
   });
-  return router
+  return router;
 };

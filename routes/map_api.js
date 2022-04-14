@@ -4,7 +4,7 @@ const router = express.Router();
 
 module.exports = (db) => {
 
-  router.get("/", (req,res) => {
+  router.get("/", (req, res) => {
     db.query('SELECT * FROM maps;')
       .then((data) => {
         const map = data.rows;
@@ -38,7 +38,6 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   }
-
   );
   return router;
 };

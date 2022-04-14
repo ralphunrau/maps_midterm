@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/_header.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <script> const id = <%= userId %> </script> -->
   </head>
   <nav>
     <div class="maps_profile">
@@ -19,6 +20,7 @@
 
     <div class="reg_and_login">
       <form class="login_form" action="/login" method="POST"s >
+        <!-- <label>Logged in as: <%= userId %> </label> -->
         <textarea placeholder="Login: " name="username"></textarea>
         <button type="submit">Login</button>
       </form>
