@@ -65,12 +65,12 @@ $(document).ready(function () {
           <div class='title_x'>
             <h4>Edit Form</h4>
             </div>
-          <form class='inputsContainer' method="POST" action="${point.map_id}/edit">
+          <form class='inputsContainer' method="POST" action="/maps/${point.map_id}/${point.id}/edit">
             <button class='closeButton${point.id}' type="reset"> CLOSE AND RESET </button>
             <textarea class='text' name=title placeholder ='Title: ${point.point_title}' style='height: 40px;'></textarea>
             <textarea class='text' name=descr placeholder ='Description: ${point.point_description}' style='height: 40px;'></textarea>
             <textarea class='text' name=url placeholder ='URL: ${point.point_url}' style='height: 40px;'></textarea>
-            <button>Submit </button>
+            <button type="submit"> Submit </button>
           </form>
         </div>
         `;
