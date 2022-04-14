@@ -1,9 +1,9 @@
 body {
   div.maps_joined {
-
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 
     div.maps_left {
       padding: 10px;
@@ -66,12 +66,56 @@ body {
       }
     }
 
-    div.maps_right {
-      width: 34%;
+    .pointContainer {
       display: flex;
-      justify-content: space-evenly;
-      flex-direction: column;
+      flex-direction: row;
+      justify-content: space-between;
       align-items: center;
+      width: 100%;
+    }
+
+    .points_right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 25%
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 27%
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      width: 100%
+    }
+
+    .editForm {
+      //hides forms done on css
+      // display: none;
+      display: flex;
+      flex-direction: column;
+      padding-left: 10px;
+      padding-bottom: 10px;
+      border: 1px solid black;
+    }
+
+    .text {
+      margin-bottom: 5px;
+    }
+
+    .inputsContainer {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .title_x {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
     }
   }
 }

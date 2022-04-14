@@ -5,10 +5,10 @@ $(document).ready(function () {
     .then(data => {
 
       // console.log('data', data[0]);
-      const maplat = "-123.127576";
-      const maplng = "49.28249";
+      // const maplat = "-123.127576";
+      // const maplng = "49.28249";
       $('#mapTitle').html(data[0].map_title);
-      const map = L.map('map').setView([data[0].map_lat, data[0].map_lng], 13);
+      const map = L.map('map').setView([data[0].map_lat, data[0].map_lng], 10);
       L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`).addTo(map);
 
       for (const point of data) {
@@ -19,24 +19,17 @@ $(document).ready(function () {
         let lng = point.point_lng;
         L.marker([lng, lat]).addTo(map)
           .bindPopup(`${point.point_title}<br>${point.point_description}
-          <br><img src="/maps/${point.point_url} width="100" height="100"">
-          <form class="edit_form">
-          <button type="submit">EDIT</button>
-          </form>
-          <form class="delete_form" action='/maps/${id}/${point.point_title}/delete' method="GET">
-          <button>DELETE</button>
-          </form>`)
+          <br><img src="${point.point_url} width="100" height="100"">`)
           .openPopup();
       }
       const popup = L.popup();
       const onMapClick = (e) => {
-        L.marker([e.latlng.lat, e.latlng.lng])
-          .bindPopup('A point of interest.')
-          .openPopup();
+        L.marker([e.latlng.lat, e.latlng.lng]);
+        // .openPopup();
         popup
           .setLatLng(e.latlng)
           .setContent(`You clicked the map at ${e.latlng.lat}, ${e.latlng.lng}. Give this point some information:`)
-          .openOn(map);
+          .openOn(map)
         const popupForm = $(`
           <form class ='pointCreationForm' action='/maps/add/${e.latlng.lng}/${e.latlng.lat}/${data[0].map_id}' method='POST'>
             <div><textarea name='title' placeholder ='Enter a title:' style='height: 20px;'></textarea></div>
@@ -68,26 +61,48 @@ $(document).ready(function () {
       map.on('click', onMapClick);
     });
 
-    $.get('/api/maps')
-    .then(maps => {
-      for (const map of maps) {
-        const mapsItem = function (map) {
-          const division = $("<div></div");
-          $(".maps_right").append(division);
-          const itemContent = `
-          <a href="/maps/${map.id}">
-          <h2>${map.map_title}</h2>
-          </a>
-          `
-          const newMap = division.append(itemContent);
-          return newMap;
-        }
-        mapsItem(map);
+  $.get(`/api/points/${id}`)
+    .then(points => {
+      for (const point of points) {
+        console.log(point);
+        const div = $("<div class='container'></div");
+        $(".points_right").append(div);
+        const divContent = `
+        <div class='pointContainer'>
+          <h3>${point.point_title} </h3>
+          <div class='buttons'>
+            <button class='editButton${point.id}'> Edit </button>
+            <form action='/maps/${id}/${point.point_title}/delete' method="GET">
+              <button>DELETE</button>
+            </form>
+          </div>
+        </div>
+
+        <div class='editForm${point.id}'>
+          <div class='title_x'>
+            <h4>Edit Form</h4>
+            </div>
+          <form class='inputsContainer' method="POST" action="${point.map_id}/edit">
+            <button class='closeButton${point.id}' type="reset"> CLOSE AND RESET </button>
+            <textarea class='text' name=title placeholder ='Title: ${point.point_title}' style='height: 40px;'></textarea>
+            <textarea class='text' name=descr placeholder ='Description: ${point.point_description}' style='height: 40px;'></textarea>
+            <textarea class='text' name=url placeholder ='URL: ${point.point_url}' style='height: 40px;'></textarea>
+            <button>Submit </button>
+          </form>
+        </div>
+        `;
+        div.append(divContent);
+
+        $(`.editForm${point.id}`).hide();
+
+        $(`.editButton${point.id}`).on('click', () => {
+          $(`.editForm${point.id}`).slideDown();
+        });
+
+        $(`.closeButton${point.id}`).on('click', () => {
+          $(`.editForm${point.id}`).slideUp();
+        });
       }
-    })
-
-    // $('.fav_button').click(function () {
-
-    // })
+    });
 
 });
