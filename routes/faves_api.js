@@ -1,9 +1,13 @@
-
 const express = require('express');
 const router = express.Router();
+
 module.exports = (db) => {
+
+  // GET DATA ABOUT CURRENT USER FAVES
   router.get("/", (req, res) => {
+
     const id = req.session.userId;
+
     db.query(`SELECT maps.* FROM maps
     JOIN favourites ON maps.id = favourites.map_id
     JOIN users ON users.id = favourites.user_id
@@ -20,5 +24,6 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
   return router;
 };

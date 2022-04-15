@@ -1,10 +1,17 @@
 $(document).ready(function () {
+
+  // GET ALL MAPS BELONGING TO A SPECIFIC USER
   $.get(`/api/profile/`)
     .then(data => {
+
       for (const map of data) {
+
+        // LISTS ALL MAPS CREATED BY USER
         const mapsItem = function (map) {
+
           const article = $("<article></article>").addClass('content');
           $(".container").append(article);
+
           const itemContent = `
           <div>
             <img src=${map.map_pic_url}>
@@ -15,7 +22,9 @@ $(document).ready(function () {
                ${map.map_description}
             </a>
           </div>`;
+
           const newItem = article.append(itemContent);
+
           return newItem;
         };
         mapsItem(map);

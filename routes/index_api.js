@@ -1,12 +1,12 @@
-
 const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
 
+  //GET ALL MAPS FROM DATABASE
   router.get("/", (req, res) => {
-    db.query(`SELECT *
-    FROM maps
+
+    db.query(`SELECT * FROM maps
     WHERE maps.map_active = true
     ORDER BY map_created_on;`)
       .then(data => {
@@ -19,5 +19,6 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
   return router;
 };

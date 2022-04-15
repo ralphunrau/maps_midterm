@@ -1,10 +1,7 @@
-
 const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  // .addClass("content");
-  // const item = $("article").addClass("content");
 
   // RETURNS TABLE OF ALL MAPS
   router.get("/", (req, res) => {
@@ -35,21 +32,30 @@ module.exports = (db) => {
     let description = req.body.description;
     let image = req.body.image;
 
-    db.query('SELECT user_id FROM maps WHERE maps.id = $1', [req.params.id])
+    db.query(`SELECT user_id FROM maps
+    WHERE maps.id = $1`,
+    [req.params.id])
       .then((data) => {
         if ((data.rows[0].user_id) != userId) {
+
           const errorMsg = 'You must be an authenticated user to add a point to a map!';
           res.render('error', { id, userId, errorMsg});
           return;
+
         } else {
-          db.query('INSERT INTO points (map_id,point_lng, point_lat, point_title, point_description, point_url) VALUES ($1,$2,$3,$4,$5,$6)',
-            [id, lng, lat, title, description, image]);
+
+          db.query(`INSERT INTO points (map_id,point_lng, point_lat, point_title, point_description, point_url)
+          VALUES ($1,$2,$3,$4,$5,$6)`,
+          [id, lng, lat, title, description, image]);
+
           res.render('map_view', { id, userId });
         }
       });
   });
+
   //CREATES NEW MAP
   router.post("/create/:lat/:lng", (req, res) => {
+
     const userId = req.session.userId;
     const mapTitle = req.body.mapTitle;
     const mapDescription = req.body.mapDescription;
@@ -59,27 +65,45 @@ module.exports = (db) => {
     const pointImage = req.body.pointImage;
     const lat = req.params.lng;
     const lng = req.params.lat;
-    db.query('INSERT INTO maps (user_id, map_lng, map_lat, map_title, map_description, map_pic_url) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *', [userId, lng, lat, mapTitle, mapDescription, mapImage])
+
+    db.query(`INSERT INTO maps (user_id, map_lng, map_lat, map_title, map_description, map_pic_url)
+    VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`,
+    [userId, lng, lat, mapTitle, mapDescription, mapImage])
       .then(data => {
+
         const id = data.rows[0].id;
-        db.query(`INSERT INTO points (map_id,point_lng, point_lat, point_title, point_description, point_url) VALUES ($1, $2, $3, $4, $5, $6)`, [id, lng, lat, pointTitle, pointDescription, pointImage]);
+
+        db.query(`INSERT INTO points (map_id,point_lng, point_lat, point_title, point_description, point_url)
+        VALUES ($1, $2, $3, $4, $5, $6)`,
+        [id, lng, lat, pointTitle, pointDescription, pointImage]);
+
         res.render('map_view', { id, userId });
       });
   });
 
   //CHANGE POINT TO NOT ACTIVE - TO DELETE FROM MAP
   router.get("/:id/:map_title/delete", (req, res) => {
+
     const userId = req.session.userId;
     const id = req.params.id;
     const mapTitle = req.params.map_title;
 
-    db.query('SELECT user_id FROM maps WHERE maps.id = $1', [id])
+    db.query(`SELECT user_id FROM maps
+    WHERE maps.id = $1`,
+    [id])
       .then((data) => {
+
         if (userId != data.rows[0].user_id) {
+
           const errorMsg = 'You must be an authenticated user to delete a map!';
           res.render('error', { id, userId, errorMsg});
+
         } else {
-          db.query(`UPDATE points SET point_active = false WHERE point_title = $1`, [mapTitle]);
+
+          db.query(`UPDATE points SET point_active = false
+          WHERE point_title = $1`,
+          [mapTitle]);
+
           res.render('map_view', { id, userId });
         }
       });
@@ -87,15 +111,23 @@ module.exports = (db) => {
 
   //EDITS SELECTED VALUES IN ROW ON POINT TABLE
   router.post("/:id/:point/edit", (req, res) => {
+
     const id = req.params.id;
     const userId = req.session.userId;
     const pointId = req.params.point;
-    db.query('SELECT user_id FROM maps WHERE maps.id = $1', [id])
+
+    db.query(`SELECT user_id FROM maps
+    WHERE maps.id = $1`,
+    [id])
       .then((data) => {
+
         if (userId != data.rows[0].user_id) {
+
           const errorMsg = 'You must be an authenticated user to edit a map!';
           res.render('error', { id, userId, errorMsg});
+
         } else {
+
           const queryParams = [];
           let queryString = `UPDATE points SET `;
 
@@ -113,11 +145,15 @@ module.exports = (db) => {
             queryParams.push(req.body.url);
             queryString += `point_url = $${queryParams.length} `;
           }
+
           queryString += (`WHERE id = ${pointId} RETURNING *;`);
+
           db.query(queryString, queryParams)
             .then(data => {
+
               const userId = req.session.userId;
               const maps = data.rows;
+
               res.render("map_view", { id, userId });
             })
             .catch(err => {
@@ -129,13 +165,6 @@ module.exports = (db) => {
         }
       });
   });
-
-
-  router.post("/add/:lat/:lng", (req, res) => {
-    res.render();
-  });
-
-
 
   return router;
 };

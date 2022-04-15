@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/index.css" type="text/css" />
@@ -12,24 +13,31 @@
   <script type="text/javascript" src="/scripts/faves.js"></script>
 
   <script> const id = <%= userId %> </script>
+
 </head>
 
 <body>
   <%- include('partials/_header') %>
+
   <div class="title">
+
     <h1>My Absolute FAVORITES</h1>
     <div class="redirects">
+
       <form method="GET" action="/maps/create">
         <button> Create a Map </button>
       </form>
+
       <form method="GET" action="/profiles">
         <button> Created by Me </button>
       </form>
+
     </div>
+
   </div>
+
   <div class="container"></div>
+
 </body>
 
-
 </html>
-
