@@ -1,71 +1,70 @@
 $(document).ready(function () {
-  // let map_id = '';
 
+  // GET POINTS FOR CORRESPONDING MAPS
   $.get(`/api/maps/${id}`)
     .then(data => {
 
+      // INITIALIZE THE LATITUDE AND LONGITUDE POINTS
       const lat = data[0].map_lat;
       const lng = data[0].map_lng;
+      const markers = [];
 
+      // INITIALIZE THE MAP AND RENDERS THE TEXTURES
       $('#mapTitle').html(data[0].map_title);
-      const map = L.map('map').setView([lat, lng], 17);
+      const map = L.map('map').setView([lat, lng], 13);
       L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`).addTo(map);
 
+      // DISPLAYS THE POINTS ON THE CURRENT MAP
       for (const point of data) {
-        if (data.point_lat === null) {
-          return;
-        }
-        let lat = point.point_lat;
-        let lng = point.point_lng;
+
+        const lat = point.point_lat;
+        const lng = point.point_lng;
+
+        //ADDS POINT TO MAP
         L.marker([lng, lat]).addTo(map)
           .bindPopup(`${point.point_title}<br>${point.point_description}
           <br><img src="${point.point_url} width="100" height="100"">`)
           .openPopup();
+
+        markers.push([lng, lat]);
       }
+
+      map.fitBounds(markers);
       const popup = L.popup();
+
+      // WHEN USER SELECTS A POINT ON A MAP
       const onMapClick = (e) => {
-        L.marker([e.latlng.lat, e.latlng.lng]);
-        // .openPopup();
+
+        L.marker([e.latlng.lat, e.latlng.lng])
         popup
           .setLatLng(e.latlng)
           .setContent(`You clicked the map at ${e.latlng.lat}, ${e.latlng.lng}. Give this point some information:`)
           .openOn(map)
+
         const popupForm = $(`
           <form class ='pointCreationForm' action='/maps/add/${e.latlng.lng}/${e.latlng.lat}/${data[0].map_id}' method='POST'>
             <div><textarea name='title' placeholder ='Enter a title:' style='height: 20px;'></textarea></div>
             <div><textarea name='description' placeholder ='Enter a description:' style='height: 40px;'></textarea></div>
             <div><textarea name='image' placeholder ='Enter a image url:' style='height: 20px;'></textarea></div>
-            <button class='submit'>Sumbit</button>
+            <button class='submit'>Submit</button>
           </form>
         `);
+
         $('.leaflet-popup-content').append(popupForm);
       };
-
-      $('.edit_form').on('submit', (e) => {
-        e.preventDefault();
-        // action="/maps/${id}/:${point.point_title}/edit" method="POST"
-        const editPopupForm = `
-        <form class ='editPointForm'>
-          <div><textarea name='title' placeholder ='Enter a new title:' style='height: 20px;'></textarea></div>
-          <div><textarea name='description' placeholder ='Enter a new description:' style='height: 40px;'></textarea></div>
-          <div><textarea name='image' placeholder ='Enter a new image url:' style='height: 20px;'></textarea></div>
-          <button class='submit'>Sumbit</button>
-        </form>`;
-
-        $('.edit_form').remove();
-        $('.delete_form').remove();
-        $('.leaflet-popup-content').append(editPopupForm);
-      });
 
       map.on('click', onMapClick);
     });
 
+  // GET A SPECIFIC POINT BY ID
   $.get(`/api/points/${id}`)
     .then(points => {
       for (const point of points) {
-        console.log(point);
+
         const div = $("<div class='container'></div");
         $(".points_right").append(div);
+
+        //CREATE POINTS SIDEBAR ON MAP PAGE
         const divContent = `
         <div class='pointContainer'>
           <h3>${point.point_title} </h3>
@@ -90,8 +89,10 @@ $(document).ready(function () {
           </form>
         </div>
         `;
+
         div.append(divContent);
 
+        //REVEALS EDIT CLOSES EDIT FORM
         $(`#editForm${point.id}`).hide();
 
         $(`.editButton${point.id}`).on('click', () => {

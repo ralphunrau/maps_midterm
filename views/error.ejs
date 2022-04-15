@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/error.css" type="text/css" />
@@ -11,15 +12,17 @@
 
   <script> const id = <%= userId %> </script>
   <script> const errorMsg = <%= errorMsg %> </script>
+
 </head>
 
 <body>
   <%- include('partials/_header') %>
+
   <form class="error_body" action="/maps" method="GET">
     <h2><%- errorMsg %></h2>
     <button type="submit">Redirect to the maps page</button>
-  </div>
-</form>
+  </form>
 
+</body>
 
 </html>

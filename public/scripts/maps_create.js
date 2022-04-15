@@ -1,13 +1,19 @@
 $(document).ready(function () {
-  const map = L.map('map').setView([49.286796, -123.129427], 60);
+
+  //INITIALIZE A NEW MAP AND SET TEXTURE
+  const map = L.map('map').setView([49.286796, -123.129427], 9);
   L.tileLayer(`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`).addTo(map);
 
   const popup = L.popup();
+
+  // WHEN USER SELECTS A POINT ON A MAP
   function onMapClick(e){
+
     popup
     .setLatLng(e.latlng)
     .setContent(`You clicked the map at ${e.latlng.lat}, ${e.latlng.lng}. Give this point some information:`)
     .openOn(map);
+
     const popupForm = $(`
     <form class ='pointCreationForm' action='/maps/create/${e.latlng.lat}/${e.latlng.lng}' method='POST'>
       <div><textarea name='mapTitle' placeholder ='Enter a map title:' style='height: 20px;'></textarea></div>
@@ -19,8 +25,9 @@ $(document).ready(function () {
       <button class='submit'>Sumbit</button>
     </form>
   `);
-  $('.leaflet-popup-content').append(popupForm)
-  }
-  map.on('click', onMapClick);
 
+  $('.leaflet-popup-content').append(popupForm)
+  };
+
+  map.on('click', onMapClick);
 });
