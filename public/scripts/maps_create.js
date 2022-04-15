@@ -22,7 +22,7 @@ $(document).ready(function () {
       <div><textarea name='pointTitle' placeholder ='Enter a point title:' style='height: 20px;'></textarea></div>
       <div><textarea name='pointDesc' placeholder ='Enter a point description:' style='height: 20px;'></textarea></div>
       <div><textarea name='pointImage' placeholder ='Enter a point url:' style='height: 20px;'></textarea></div>
-      <button class='submit'>Sumbit</button>
+      <button class='submit'>Submit</button>
     </form>
   `);
 
